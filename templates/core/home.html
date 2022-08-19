@@ -21,13 +21,14 @@
                       {% csrf_token %}
                       <h1>Telerehabilitación</h1>
   
-                       {% render_field form.username class="form-control" autocomplete="off" placeholder="Username" %}
+                       {% render_field form.username class="form-control" autocomplete="off" placeholder="Email" %}
                        {% render_field form.password class="form-control" autocomplete="off" placeholder="Password" %}
   
                        <input type="submit" name="" value="Iniciar sesión">
   
                   </form>
-                  <a href="paciente/signup">Registrate</a>
+                 
+                  <a href="/kinesiologo/signup">Solicitar cuenta kinesiologo</a>
 
               </div>
           </div>
