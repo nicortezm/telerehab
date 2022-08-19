@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+{% load widget_tweaks %}
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telerehabilitación</title>
+</head>
+<body>
+  <div>
+    
+    <h2>Citt Duoc 2022</h2>
+    <!-- <p>Haz tus ejercicios desde tu casa!</p> -->
+    <div class="container">
+      <div class="row">
+          <div class="col-md-6">
+              <div class="card">
+                  <form class="box" method="post">
+                      {% csrf_token %}
+                      <h1>Telerehabilitación</h1>
+  
+                       {% render_field form.username class="form-control" autocomplete="off" placeholder="Username" %}
+                       {% render_field form.password class="form-control" autocomplete="off" placeholder="Password" %}
+  
+                       <input type="submit" name="" value="Iniciar sesión">
+  
+                  </form>
+                  <a href="paciente/signup">Registrate</a>
+
+              </div>
+          </div>
+      </div>
+  </div>
+  <br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br>
+  </div>  
+  
+</body>
+</html>
