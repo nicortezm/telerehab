@@ -12,7 +12,7 @@ class UserForm(forms.ModelForm):
 class PacienteForm(forms.ModelForm):
     class Meta:
         model=models.Paciente
-        fields=['description','cuidador','profile_pic','comuna']
+        fields=['description','cuidador','profile_pic','comuna','telefono']
 
 
 class KinesiologoForm(forms.ModelForm):

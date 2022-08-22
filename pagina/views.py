@@ -43,6 +43,7 @@ def paciente_signup_view(request):
             user.set_password(user.password)
             user.save()
             paciente=pacienteForm.save(commit=False)
+            paciente.kinesiologo = Kinesiologo.objects.get(user_id=request.user.id)
             paciente.user=user
             paciente.save()
             my_paciente_group = Group.objects.get_or_create(name='PACIENTE') # Se crea o se asigna el grupo PACIENTE
