@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load widget_tweaks %}
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -12,44 +12,10 @@
     <h3 style="text-align: center;">Kinesiologo Signup Form</h3>
   <form method="POST" autocomplete="off" enctype="multipart/form-data">
       {% csrf_token %}
+      {{userForm.as_p}}
+      {{kinesiologoForm.as_p}}
       
-      <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="first_name">Nombre</label>
-            {% render_field userForm.first_name|attr:'required:true'  class="form-control"  placeholder="Ingrese su nombre" %}
-          </div>
-          <div class="form-group col-md-6">
-            <label for="last_name">Apellido</label>
-            {% render_field userForm.last_name|attr:'required:true'  class="form-control" placeholder="Ingrese su apellido" %}
-          </div>
-        </div>
-  
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="mobile">Rut</label>
-            {% render_field kinesiologoForm.rut|attr:'required:true'  class="form-control" placeholder="Rut" %}
-          </div>
-          
-        </div>
-  
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="email">email</label>
-            {% render_field userForm.email|attr:'required:true'  class="form-control" placeholder="Ingrese su email" %}
-          </div>
-          <div class="form-group col-md-6">
-            <label for="inputPassword4">Password</label>
-            {% render_field userForm.password|attr:'required:true'  class="form-control" placeholder="Ingrese su contraseña" %}
-          </div>
-        </div>
-  
-        <div class="form-row">
-          <div class="form-group col-md-12">
-            <label for="profile_pic">Profile Picture</label>
-            {% render_field kinesiologoForm.profile_pic|attr:'required:true' class="form-control" placeholder="" %}
-          </div>
-          
-        </div>
+      
   
   
       <button type="submit" class="btn btn-success" style="border-radius:0px;">Solicitar cuenta</button>

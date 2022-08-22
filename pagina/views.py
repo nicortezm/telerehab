@@ -31,11 +31,11 @@ def afterlogin_view(request):
 # VISTAS PACIENTE
 def paciente_signup_view(request):
     # Asignamos los valores del formulario web al formulario django
-    userForm=forms.PacienteUserForm() 
+    userForm=forms.UserForm() 
     pacienteForm=forms.PacienteForm()
     mydict={'userForm':userForm,'pacienteForm':pacienteForm} # Diccionario que retorna los valores 
     if request.method=='POST':
-        userForm=forms.PacienteUserForm(request.POST)
+        userForm=forms.UserForm(request.POST)
         pacienteForm=forms.PacienteForm(request.POST,request.FILES)
         if userForm.is_valid() and pacienteForm.is_valid():
             user=userForm.save(commit=False) 
@@ -60,11 +60,11 @@ def paciente_dashboard_view(request):
 # VISTAS KINESIOLOGO
 
 def kinesiologo_signup_view(request):
-    userForm=forms.KinesiologoUserForm()
+    userForm=forms.UserForm()
     kinesiologoForm=forms.KinesiologoForm()
     mydict={'userForm':userForm,'kinesiologoForm':kinesiologoForm}
     if request.method=='POST':
-        userForm=forms.KinesiologoUserForm(request.POST)
+        userForm=forms.UserForm(request.POST)
         kinesiologoForm=forms.KinesiologoForm(request.POST,request.FILES)
         if userForm.is_valid() and kinesiologoForm.is_valid():
             user=userForm.save(commit=False)

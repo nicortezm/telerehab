@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-{% load widget_tweaks %}
+
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -21,8 +21,7 @@
                       {% csrf_token %}
                       <h1>Telerehabilitación</h1>
   
-                       {% render_field form.username class="form-control" autocomplete="off" placeholder="Email" %}
-                       {% render_field form.password class="form-control" autocomplete="off" placeholder="Password" %}
+                       {{form}}
   
                        <input type="submit" name="" value="Iniciar sesión">
   
