@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
+
+/* PALETA DE COLORES */
+:root{
+  --rojoclaro: #e63946;
+  --blanco: #f1faee;
+  --navBlue: #a8dadc;
+  --blue2: #457b9d;
+  --blue3: #1d3557;
+}
+
+
+*{
+  font-family: 'Roboto', sans-serif;
+}
+
+nav {
+  background-color: var(--blue2);
+}
+
+
+/* DURACION DEL FADE */
+.animate__animated.animate__fadeInLeft {
+  --animate-duration: 1.7s;
+}  
+
+/* DURACION DEL FADE */
+.animate__animated.animate__fadeInRight {
+  --animate-duration: 1.7s;
+}  
+
+
+@media (max-width: 600px){
+  .h5-responsivee{
+    font-size: 16px;
+  }
+
+  .ejercicios {
+    margin-top: 50px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
