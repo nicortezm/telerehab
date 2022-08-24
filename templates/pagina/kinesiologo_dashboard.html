@@ -7,7 +7,35 @@
   <title>Document</title>
 </head>
 <body>
-  <p>Kinesiologo - Autorizado</p>
+  <p>Kinesiologo - Autorizado || Nombre: {{user.first_name}} {{user.last_name}}</p>
+  <h2>Listado de mis pacientes</h2>
+  <table>
+    <tr>
+      <th>Nombre</th>
+      <th>Telefono</th>
+      <th>Comuna</th>
+      <th>Cuidador</th>
+    </tr>
+    {% for p in pacientes %}
+
+    <tr>
+      <td>{{p.first_name}} {{p.last_name}}</td>
+      <td>{{p.telefono}}</td>
+      <td>{{p.comuna}}</td>
+      <td>{{p.cuidador}}</td>
+
+
+    </tr>
+    
+
+    {% endfor %}
+
+  </table>
+
+ 
+
+
+  <br><br><br><br><br>
   <a href="paciente/signup">Registrar paciente</a>
   
 </body>

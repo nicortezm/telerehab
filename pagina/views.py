@@ -84,7 +84,22 @@ def kinesiologo_signup_view(request):
 @login_required(login_url='login')
 @user_passes_test(is_kinesiologo)
 def kinesiologo_dashboard_view(request):
-    return render(request,'pagina/kinesiologo_dashboard.html')
+
+ 
+    pacientes = models.Paciente.objects.filter(kinesiologo_id__user_id=request.user.id).values_list('comuna','telefono','cuidador')
+    usuarios = list()
+    for p in pacientes.values():
+        
+        usuario = models.User.objects.get(id=p['user_id'])
+        p['first_name']= usuario.first_name
+        p['last_name']=usuario.last_name
+        usuarios.append(p)
+    data = {
+        'pacientes':usuarios,
+        # 'users': users,
+    }
+    
+    return render(request,'pagina/kinesiologo_dashboard.html',data)
 
 @login_required(login_url='login')
 @user_passes_test(is_kinesiologo)
