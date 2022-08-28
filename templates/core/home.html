@@ -1,42 +1,35 @@
-<!DOCTYPE html>
+{% extends "core/navbar.html" %}
+
 {% load static %}
 
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Telerehabilitación</title>
-</head>
-<body>
-  <div>
-    
-    <h2>Citt Duoc 2022</h2>
-    <!-- <p>Haz tus ejercicios desde tu casa!</p> -->
-    <div class="container">
-      <div class="row">
-          <div class="col-md-6">
-              <div class="card">
-                  <form class="box" method="post">
-                      {% csrf_token %}
-                      <h1>Telerehabilitación</h1>
-  
-                       {{form}}
-  
-                       <input type="submit" name="" value="Iniciar sesión">
-  
-                  </form>
-                 
-                  <a href="/kinesiologo/signup">Solicitar cuenta kinesiologo</a>
 
-              </div>
+{% block content %}
+  <div class="animate__animated animate__backInDown container w-80 d-flex justify-content-center">
+
+    <div class=" card p-5 mt-5 shadow-lg">
+      <form class="box" method="post">
+          {% csrf_token %}
+          <h4 class="text-muted" style="text-align: center;">Te damos la bienvenida al portal</h4>
+          <br>
+          <label class="form-label">Correo <span class="text-danger">*</span></label>
+          {{form.username}}
+                       
+          <br>
+          <label class="form-label">Contraseña <span class="text-danger">*</span></label>
+          {{form.password}}
+        
+          <div class="d-flex justify-content-center">
+            
+            <button target="_parent" class="btn-grad-moon btn-lg text-white" type="submit">
+              <i class="fa-solid fa-right-to-bracket" >&nbsp;</i>
+                Ingresar       
+            </button>         
           </div>
-      </div>
+          
+        </form>
+      
+    </div>
   </div>
-  <br><br><br><br><br><br><br><br><br>
-  <br><br><br><br><br><br><br><br><br>
-  <br><br><br><br><br>
-  </div>  
-  
-</body>
-</html>
+
+{% endblock content %}
+

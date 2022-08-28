@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> 
+  {% block title %}
+  
+  {% endblock title %}
+  </title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css' %} ">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/botones.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <ul class="navbar-nav mr-auto">
+        <img src="{% static 'img/logopomo.png' %}" width="100" height="auto" class="img-fluid">           
+      </ul>
+
+      {% if user.is_authenticated %}
+      <!-- BOTON MENU HAMBURGUESA -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+            <div class="mr-3">       
+                <h6 class="text-uppercase text-white"> {{user.first_name}} {{user.last_name}}</h6>
+                <a class="h6" href="/logout" style="color: white;">Cerrar Sesion</a>
+            </div>
+            <img class="img-thumbnail rounded mr-3" src="{{profile_pic.url}}" width="50" alt="">
+            <img class="img-fluid" src="{% static 'img/Logo-Duoc.png' %}" width="160">
+        </div>
+      {% else %}
+      <img class="img-fluid" src="{% static 'img/Logo-Duoc.png' %}" width="160">
+      {% endif %}
+     
+     
+      
+    </nav>
+  </header>
+
+
+
+  {% block content %}
+  
+  {% endblock content %}
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+</body>
+</html>

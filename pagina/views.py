@@ -7,11 +7,13 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required,user_passes_test
 from users.views import is_paciente,is_kinesiologo
 from users.models import Kinesiologo
+
+
 # Create your views here.
 
 # VISTAS GENERICAS
 def home(request):
-  return render(request,'core/home.html') # El inicio es el login
+    return render(request,'core/home.html') # El inicio es el login
 
 def afterlogin_view(request):
     if is_paciente(request.user):      

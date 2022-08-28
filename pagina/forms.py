@@ -1,3 +1,4 @@
+from django.contrib.auth.forms import AuthenticationForm, UsernameField
 from django import forms
 from users import models
 
@@ -20,3 +21,19 @@ class KinesiologoForm(forms.ModelForm):
         model=models.Kinesiologo
         fields=['rut','profile_pic']
 
+
+
+
+class UserLoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super(UserLoginForm, self).__init__(*args, **kwargs)
+
+    username = UsernameField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'ejemplo@gmail.com', 'id': 'usuario','type':'email'}))
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Ingrese su contraseña',
+            'id': 'contrasena',
+        }
+))
