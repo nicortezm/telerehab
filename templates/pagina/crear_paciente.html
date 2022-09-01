@@ -1,0 +1,113 @@
+{% extends 'core/navbar.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="px-3 py-1">
+    <a class="text-uppercase text-dark text-decoration-none" style="cursor: pointer;"><i
+            class="fa-solid fa-angle-left"></i> Volver</a>
+</div>
+
+<div class="d-flex justify-content-start p-3 animate__animated animate__fadeInLeft">
+    <form class="w-100" method="POST" autocomplete="off" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    {% csrf_token %}
+
+                    <div class="form-group col-sm-6 flex-column d-flex">
+                        <label class="form-control-label">
+                            <b>Nombre Paciente</b>
+                            <span class="text-danger">*</span>
+                        </label>
+                        {{ userForm.first_name }}
+                    </div>
+
+                    <div class="form-group col-sm-6 flex-column d-flex">
+                        <label class="form-control-label">
+                            <b>Contraseña Paciente</b>
+                            <span class="text-danger">*</span>
+                        </label>
+
+                        {{ userForm.password }}
+                        <small class="text-muted mt-1">La contraseña debe tener más de 6 caracteres</small>
+                    </div>
+                </div>
+
+                <div class="row justify-content-between text-left">
+                    <div class="form-group col-sm-6 flex-column d-flex">
+                        <label class="form-control-label">
+                            <b>Correo Paciente</b>
+                            <span class="text-danger">*</span>
+                        </label>
+                        {{ userForm.email }}
+                    </div>
+
+                    <div class="form-group col-sm-6 flex-column d-flex">
+                        <label class="form-label">
+                            <b>Cuidador</b>
+                            <span class="text-danger">*</span>
+                        </label>
+                        {{ pacienteForm.cuidador }}
+                    </div>
+                </div>
+
+                <div class="row justify-content-between text-left">
+                    <div class="form-group col-sm-6 flex-column d-flex">
+                        <label class="form-control-label">
+                            <b>Número Telefonico</b>
+                            <span class="text-danger">*</span>
+                        </label>
+                        {{pacienteForm.telefono}}
+                    </div>
+
+                    <div class="form-group col-sm-6 flex-column d-flex">
+                        <label class="form-label">
+                            <b>Comuna Paciente</b>
+                            <span class="text-danger">*</span>
+                        </label>
+                        {{pacienteForm.comuna}}
+                    </div>
+                </div>
+
+                <div class="row justify-content-between text-left">
+                    <div class="form-group col-sm-12 flex-column d-flex">
+                        <label class="form-control-label">
+                            <b>Descripcion del paciente</b>
+                            <span class="text-danger">*</span>
+                        </label>
+                        {{pacienteForm.description}}
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm">
+                <div class="d-flex justify-content-center">
+                    <img style="object-fit: contain; cursor:pointer;" class="img-fluid p-5 rounded-circle"
+                        src="{% static 'img/fotoPerfil.png' %}" alt="foto" />
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <div class="btn-grad-gray" onclick="_upload()">
+                        Subir Archivo
+                        <i class="fa-solid fa-upload ml-2"></i>
+                        <input type="file" id="file_upload_id" style="display: none;"
+                            accept="image/png, image/jpeg, image/JPG" required />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <button class="btn-grad-moon mr-3 text-white" style="color: black;">Crear Paciente</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function _upload() {
+        document.getElementById('file_upload_id').click()
+    }
+</script>
+{% endblock %}

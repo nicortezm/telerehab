@@ -4,32 +4,31 @@
 
 
 {% block content %}
-  <div class="animate__animated animate__backInDown container w-80 d-flex justify-content-center">
+<div class="animate__animated animate__backInDown container w-80 d-flex justify-content-center">
 
     <div class=" card p-5 mt-5 shadow-lg">
-      <form class="box" method="post">
-          {% csrf_token %}
-          <h4 class="text-muted" style="text-align: center;">Te damos la bienvenida al portal</h4>
-          <br>
-          <label class="form-label">Correo <span class="text-danger">*</span></label>
-          {{form.username}}
-                       
-          <br>
-          <label class="form-label">Contraseña <span class="text-danger">*</span></label>
-          {{form.password}}
-        
-          <div class="d-flex justify-content-center">
-            
-            <button target="_parent" class="btn-grad-moon btn-lg text-white" type="submit">
-              <i class="fa-solid fa-right-to-bracket" >&nbsp;</i>
-                Ingresar       
-            </button>         
-          </div>
-          
+        <form class="box" method="post">
+            {% csrf_token %}
+            <h4 class="text-muted" style="text-align: center;">Te damos la bienvenida al portal</h4>
+            <br>
+            <label class="form-label">Correo <span class="text-danger">*</span></label>
+            {{form.username}}
+
+            <br>
+            <label class="form-label">Contraseña <span class="text-danger">*</span></label>
+            {{form.password}}
+
+            <div class="d-flex justify-content-center">
+
+                <button target="_parent" class="btn-grad-moon btn-lg text-white" type="submit">
+                    <i class="fa-solid fa-right-to-bracket">&nbsp;</i>
+                    Ingresar
+                </button>
+            </div>
+
         </form>
-      
+
     </div>
-  </div>
+</div>
 
 {% endblock content %}
-
