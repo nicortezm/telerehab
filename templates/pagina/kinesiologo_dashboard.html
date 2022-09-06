@@ -1,5 +1,4 @@
 {% extends "core/navbar.html" %}
-<!DOCTYPE html>
 
 {% load static %}
 
@@ -35,7 +34,7 @@ Dashboard | {{user.first_name}} {{user.last_name}}
             <td>+569{{p.telefono}}4567</td>
             <td>{{p.comuna}}</td>
             <td>{{p.cuidador}}</td>
-            <td><button class="btn-grad-normal">Detalles</button></td>
+            <td> <a class="btn-grad-normal" href="{% url 'detalle-paciente' p.id %}">Detalles</a> </td>
             <td> <button class="btn-grad-red border border-none"><i class="fa-solid fa-trash-can"></i></button> </td>
         </tr>
         {% endfor %}

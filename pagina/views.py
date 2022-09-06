@@ -115,5 +115,15 @@ def kinesiologo_dashboard_view(request):
 
 @login_required(login_url='login')
 @user_passes_test(is_kinesiologo)
+def detalle_paciente_view(request, id):
+    paciente = models.Paciente.objects.get(id=id)
+    context = {
+        'paciente': paciente
+    }
+    return render(request, 'pagina/detalle_paciente.html', context=context)
+
+
+@login_required(login_url='login')
+@user_passes_test(is_kinesiologo)
 def kinesiologo_esperando_view(request):
     return render(request, 'pagina/kinesiologo_esperando_aprobacion.html')

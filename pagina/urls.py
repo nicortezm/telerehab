@@ -15,10 +15,11 @@ urlpatterns = [
          name='kinesiologosignup'),
     path('kinesiologo/dashboard', views.kinesiologo_dashboard_view,
          name='kinesiologo-dashboard'),
-    # path('logout', LogoutView.as_view(template_name='core/logout.html'),name='logout'),
     path('logout/', LogoutView.as_view(
         # you can use your named URL here just like you use the **url** tag in your django template
         next_page=reverse_lazy('login')
     ), name='logout'),
-    # path('kinesiologo/wait',views.kinesiologo_esperando_view,name='kinesiologo-esperando-aprobacion'),
+    path('kinesiologo/detalle_paciente/<id>/',
+         views.detalle_paciente_view, name='detalle-paciente'),
+
 ]

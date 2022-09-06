@@ -1,14 +1,35 @@
-{% extends "core/navbar.html" %}
+{% extends 'core/navbar.html' %}
 
 {% load static %}
 
 {% block title %}
-Paciente |
+Detalle Paciente | {{paciente.get_name}}
 {% endblock title %}
 
-
 {% block content %}
-<br><br><br>
+<div class="row">
+
+    <div class="col">
+        <div class="px-3 py-1">
+            <a class="text-uppercase text-dark text-decoration-none" href="{% url 'kinesiologo-dashboard'  %} "
+                style="cursor: pointer;"><i class="fa-solid fa-angle-left"></i> Volver</a>
+        </div>
+    </div>
+
+    <div class="col-sm">
+        <div class="text-right ">
+            Nombre Paciente: {{paciente.get_name}}
+            {% if paciente.profile_pic %}
+            <img class="img-thumbnail rounded m-3" src="{{paciente.profile_pic.url}}" width="50" alt="">
+            {% else %}
+            <img class="img-thumbnail rounded m-3" src="{% static 'img/fotoPerfil.png' %}" width="50" alt="">
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+
+
 <div class="d-flex justify-content-center p-4">
 
     <div class="row">
@@ -106,8 +127,8 @@ Paciente |
 </div>
 <div class="row">
     <div class="col d-flex justify-content-end ">
-        <button class="btn btn-info rounded-pill">Iniciar ejercicio de hoy</button>
+        <button class="btn btn-info rounded-pill">Crear Semana</button>
     </div>
     <div class="col"></div>
 </div>
-{% endblock content %}
+{% endblock %}
