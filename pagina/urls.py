@@ -5,7 +5,7 @@ from django.urls import path, reverse_lazy
 from .forms import UserLoginForm
 urlpatterns = [
     path('', LoginView.as_view(template_name='core/home.html',
-         authentication_form=UserLoginForm), name='login'),
+         authentication_form=UserLoginForm, redirect_authenticated_user=True), name='login'),
     path('afterlogin', views.afterlogin_view, name='afterlogin'),
     path('kinesiologo/crear-paciente',
          views.paciente_signup_view, name='crear-paciente'),

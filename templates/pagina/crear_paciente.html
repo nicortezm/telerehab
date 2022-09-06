@@ -2,10 +2,14 @@
 
 {% load static %}
 
+{% block title %}
+Crear Paciente | {{user.first_name}} {{user.last_name}}
+{% endblock title %}
+
 {% block content %}
 <div class="px-3 py-1">
-    <a class="text-uppercase text-dark text-decoration-none" style="cursor: pointer;"><i
-            class="fa-solid fa-angle-left"></i> Volver</a>
+    <a class="text-uppercase text-dark text-decoration-none" href="{% url 'kinesiologo-dashboard'  %} "
+        style="cursor: pointer;"><i class="fa-solid fa-angle-left"></i> Volver</a>
 </div>
 
 <div class="d-flex justify-content-start p-3 animate__animated animate__fadeInLeft">
@@ -92,15 +96,15 @@
                     <div class="btn-grad-gray" onclick="_upload()">
                         Subir Archivo
                         <i class="fa-solid fa-upload ml-2"></i>
-                        <input type="file" id="file_upload_id" style="display: none;"
-                            accept="image/png, image/jpeg, image/JPG" required />
+                        {{pacienteForm.profile_pic}}
+
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="d-flex justify-content-end">
-            <button class="btn-grad-moon mr-3 text-white" style="color: black;">Crear Paciente</button>
+            <button type="submit" class="btn-grad-moon mr-3 text-white" style="color: black;">Crear Paciente</button>
         </div>
     </form>
 </div>

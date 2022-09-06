@@ -44,6 +44,10 @@ class PacienteForm(forms.ModelForm):
             'description': forms.Textarea(
                 attrs={'class': 'form-control',
                        'style': 'resize:none;', 'cols': '300', 'rows': '6'}
+            ),
+            'profile_pic': forms.FileInput(
+                attrs={'type': 'file', 'id': 'file_upload_id', 'style': 'display: none;',
+                       'accept': 'image/png, image/jpeg, image/JPG'}
             )
         }
 
