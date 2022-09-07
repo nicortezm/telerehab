@@ -25,7 +25,9 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light">
             <ul class="navbar-nav mr-auto">
-                <img src="{% static 'img/logopomo.png' %}" width="100" height="auto" class="img-fluid">
+                <a href="/"><img src="{% static 'img/logopomo.png' %}" href="/" width="100" height="auto"
+                        class="img-fluid"></a>
+
             </ul>
 
             {% if user.is_authenticated %}
@@ -37,6 +39,7 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
+                    <a class="h6" href="{% url 'cambiar-contrasena' %}" style="color: white;">Cambiar contraseña</a>
                 </ul>
                 <div class="mr-3">
                     <h6 class="text-uppercase text-white"> {{user.first_name}} {{user.last_name}}</h6>

@@ -1,8 +1,8 @@
 from django.urls import path
 from . import views
-from django.contrib.auth.views import LoginView, LogoutView, logout_then_login
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.urls import path, reverse_lazy
-from .forms import UserLoginForm
+from .forms import UserLoginForm, UserChangePasswordForm
 urlpatterns = [
     path('', LoginView.as_view(template_name='core/home.html',
          authentication_form=UserLoginForm, redirect_authenticated_user=True), name='login'),
@@ -22,5 +22,7 @@ urlpatterns = [
          views.detalle_paciente_view, name='detalle-paciente'),
     path('administrador/', views.admin_dashboard_view,
          name='admin-dashboard'),
+    path('cambiar-contrasena', PasswordChangeView.as_view(
+        template_name='core/cambiar_contrasena.html', success_url='/', form_class=UserChangePasswordForm), name='cambiar-contrasena')
 
 ]

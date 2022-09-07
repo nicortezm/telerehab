@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import AuthenticationForm, UsernameField
+from django.contrib.auth.forms import AuthenticationForm, UsernameField, PasswordChangeForm
 from django import forms
 from users import models
 
@@ -70,5 +70,28 @@ class UserLoginForm(AuthenticationForm):
             'class': 'form-control',
             'placeholder': 'Ingrese su contraseña',
             'id': 'contrasena',
+        }
+    ))
+
+
+class UserChangePasswordForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super(UserChangePasswordForm, self).__init__(*args, **kwargs)
+    old_password = forms.CharField(label='Contraseña antigua', widget=forms.PasswordInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Ingrese su contraseña',
+        }
+    ))
+    new_password1 = forms.CharField(label='Contraseña nueva', widget=forms.PasswordInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Ingrese su contraseña',
+        }
+    ))
+    new_password2 = forms.CharField(label='Contraseña nueva (Confirmar)', widget=forms.PasswordInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Ingrese su contraseña',
         }
     ))

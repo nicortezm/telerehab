@@ -1,0 +1,29 @@
+{% extends "core/navbar.html" %}
+
+{% load static %}
+
+
+{% block content %}
+<div class="px-3 py-1">
+    <a class="text-uppercase text-dark text-decoration-none" href="/" style="cursor: pointer;"><i
+            class="fa-solid fa-angle-left"></i> Volver</a>
+</div>
+<div class="animate__animated animate__backInDown container w-80 d-flex justify-content-center">
+
+    <div class=" card p-5 mt-5 shadow-lg">
+        <form class="box" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <div class="d-flex justify-content-center">
+
+                <button target="_parent" class="btn-grad-moon btn-lg text-white" type="submit">
+                    <i class="fa-sharp fa-solid fa-shield-halved">&nbsp;</i>
+                    Cambiar contraseña
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+{% endblock content %}
