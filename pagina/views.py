@@ -5,7 +5,7 @@ from django.db.models import Sum
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required, user_passes_test
-from users.views import is_paciente, is_kinesiologo
+from users.views import is_paciente, is_kinesiologo, is_admin
 from users.models import Kinesiologo
 
 
@@ -21,13 +21,7 @@ def afterlogin_view(request):
         return redirect('paciente-dashboard')
 
     elif is_kinesiologo(request.user):
-
-        accountapproval = Kinesiologo.objects.all().filter(
-            user_id=request.user.id, status=True)
-        if accountapproval:
-            return redirect('kinesiologo-dashboard')
-        else:
-            return render(request, 'pagina/kinesiologo_esperando_aprobacion.html')
+        return redirect('kinesiologo-dashboard')
     else:
         return redirect('admin-dashboard')
 
@@ -124,6 +118,10 @@ def detalle_paciente_view(request, id):
 
 
 @login_required(login_url='login')
-@user_passes_test(is_kinesiologo)
-def kinesiologo_esperando_view(request):
-    return render(request, 'pagina/kinesiologo_esperando_aprobacion.html')
+@user_passes_test(is_admin)
+def admin_dashboard_view(request):
+    # kinesiologos = models.Kinesiologo.objects.all()
+    # data = {
+    #     'kinesiologos': kinesiologos
+    # }
+    return render(request, 'pagina/admin_dashboard.html')
