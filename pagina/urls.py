@@ -12,7 +12,7 @@ urlpatterns = [
     path('dashboard', views.paciente_dashboard_view,
          name='paciente-dashboard'),
     path('crear-kinesiologo', views.kinesiologo_signup_view,
-         name='kinesiologosignup'),
+         name='crear-kinesiologo'),
     path('kinesiologo', views.kinesiologo_dashboard_view,
          name='kinesiologo-dashboard'),
     path('logout/', LogoutView.as_view(
@@ -23,6 +23,7 @@ urlpatterns = [
     path('administrador/', views.admin_dashboard_view,
          name='admin-dashboard'),
     path('cambiar-contrasena', PasswordChangeView.as_view(
-        template_name='core/cambiar_contrasena.html', success_url='/', form_class=UserChangePasswordForm), name='cambiar-contrasena')
+        template_name='core/cambiar_contrasena.html', success_url='/', form_class=UserChangePasswordForm), name='cambiar-contrasena'),
+    path('perfil', views.perfil, name='perfil'),
 
 ]

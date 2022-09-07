@@ -1,25 +1,106 @@
-<!DOCTYPE html>
+{% extends 'core/navbar.html' %}
 
-<html lang="en">
+{% load static %}
 
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-</head>
+{% block title %}
+Crear Paciente | {{user.first_name}} {{user.last_name}}
+{% endblock title %}
 
-<body>
-    <div class="container">
-        <h3 style="text-align: center;">Kinesiologo Signup Form</h3>
-        <form method="POST" autocomplete="off" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ userForm.as_p }}
-            {{ kinesiologoForm.as_p }}
+{% block content %}
+<div class="px-3 py-1">
+    <a class="text-uppercase text-dark text-decoration-none" href="/" style="cursor: pointer;"><i
+            class="fa-solid fa-angle-left"></i> Volver</a>
+</div>
 
-            <button type="submit" class="btn btn-success" style="border-radius:0px;">Solicitar cuenta</button>
-        </form>
-    </div>
-</body>
+<div class="d-flex justify-content-start p-3 animate__animated animate__fadeInLeft">
+    <form class="w-100" method="POST" autocomplete="off" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    {% csrf_token %}
 
-</html>
+                    <div class="form-group col-sm-6 flex-column d-flex">
+                        <label class="form-control-label">
+                            <b>Nombre Kinesiologo</b>
+                            <span class="text-danger">*</span>
+                        </label>
+                        {{ userForm.first_name }}
+                    </div>
+
+                    <div class="form-group col-sm-6 flex-column d-flex">
+                        <label class="form-control-label">
+                            <b>Contraseña Kinesiologo</b>
+                            <span class="text-danger">*</span>
+                        </label>
+
+                        {{ userForm.password }}
+                        <small class="text-muted mt-1">La contraseña debe tener más de 6 caracteres</small>
+                    </div>
+                </div>
+
+                <div class="row justify-content-between text-left">
+                    <div class="form-group col-sm-6 flex-column d-flex">
+                        <label class="form-control-label">
+                            <b>Correo Kinesiologo</b>
+                            <span class="text-danger">*</span>
+                        </label>
+                        {{ userForm.email }}
+                    </div>
+
+                    <div class="form-group col-sm-6 flex-column d-flex">
+                        <label class="form-label">
+                            <b>Rut</b>
+                            <span class="text-danger">*</span>
+                        </label>
+                        {{ kinesiologoForm.rut }}
+                    </div>
+                </div>
+
+                <div class="row justify-content-between text-left">
+                    <div class="form-group col-sm-6 flex-column d-flex">
+                        <label class="form-control-label">
+                            <b>¿Activo?</b>
+                            <span class="text-danger">*</span>
+                        </label>
+                        {{kinesiologoForm.status}}
+                    </div>
+
+                    <div class="form-group col-sm-6 flex-column d-flex">
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm">
+                <div class="d-flex justify-content-center">
+                    <img style="object-fit: contain; cursor:pointer;" class="img-fluid p-5 rounded-circle"
+                        src="{% static 'img/fotoPerfil.png' %}" alt="foto" />
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <div class="btn-grad-gray" onclick="_upload()">
+                        Subir Archivo
+                        <i class="fa-solid fa-upload ml-2"></i>
+                        {{kinesiologoForm.profile_pic}}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br><br>
+
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn-grad-moon mr-3 text-white" style="color: black;">Crear Kinesiologo</button>
+        </div>
+    </form>
+</div>
+
+
+
+<script>
+    function _upload() {
+        document.getElementById('file_upload_id').click()
+    }
+</script>
+{% endblock %}

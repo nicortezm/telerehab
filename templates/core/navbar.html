@@ -39,18 +39,19 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <a class="h6" href="{% url 'cambiar-contrasena' %}" style="color: white;">Cambiar contraseña</a>
+
                 </ul>
                 <div class="mr-3">
                     <h6 class="text-uppercase text-white"> {{user.first_name}} {{user.last_name}}</h6>
                     <a class="h6" href="/logout" style="color: white;">Cerrar Sesion</a>
                 </div>
-                {% if profile_pic %}
-
-                <img class="img-thumbnail rounded mr-3" src="{{ profile_pic.url }}" width="50" alt="">
-                {% else %}
-                <img class="img-thumbnail rounded mr-3" src="{% static 'img/fotoPerfil.png' %}" width="50" alt="">
-                {% endif %}
+                <a href="{% url 'perfil' %}">
+                    {% if profile_pic %}
+                    <img class="img-thumbnail rounded mr-3" src="{{ profile_pic.url }}" width="50" alt="">
+                    {% else %}
+                    <img class="img-thumbnail rounded mr-3" src="{% static 'img/fotoPerfil.png' %}" width="50" alt="">
+                    {% endif %}
+                </a>
                 <img class="img-fluid" src="{% static 'img/Logo-Duoc.png' %}" width="160">
             </div>
             {% else %}

@@ -63,6 +63,7 @@ def paciente_dashboard_view(request):
 
 # VISTAS KINESIOLOGO
 
+# TODO: TERMINAR FUNCION CREAR KINE DESDE EL ADMIN
 def kinesiologo_signup_view(request):
     userForm = forms.UserForm()
     kinesiologoForm = forms.KinesiologoForm()
@@ -125,3 +126,8 @@ def admin_dashboard_view(request):
         'kinesiologos': kinesiologos
     }
     return render(request, 'pagina/admin_dashboard.html', data)
+
+
+def perfil(request):
+    # Codigo
+    return render(request, 'core/perfil.html')

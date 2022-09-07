@@ -1,3 +1,4 @@
+from cProfile import label
 from django.contrib.auth.forms import AuthenticationForm, UsernameField, PasswordChangeForm
 from django import forms
 from users import models
@@ -53,9 +54,20 @@ class PacienteForm(forms.ModelForm):
 
 
 class KinesiologoForm(forms.ModelForm):
+
     class Meta:
         model = models.Kinesiologo
-        fields = ['rut', 'profile_pic']
+        fields = ['rut', 'profile_pic', 'status']
+        widgets = {
+            'rut': forms.TextInput(
+                attrs={'class': 'form-control', 'type': 'text',
+                       'placeholder': 'Ingrese Rut Kinesiologo'}
+            ),
+            'profile_pic': forms.FileInput(
+                attrs={'type': 'file', 'id': 'file_upload_id', 'style': 'display: none;',
+                       'accept': 'image/png, image/jpeg, image/JPG'}
+            )
+        }
 
 
 class UserLoginForm(AuthenticationForm):

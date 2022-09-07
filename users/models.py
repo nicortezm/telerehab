@@ -1,3 +1,4 @@
+from email.policy import default
 from operator import truediv
 from pickle import TRUE
 from django.db import models
@@ -15,7 +16,7 @@ class User(AbstractUser):
 class Kinesiologo(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_pic = models.ImageField(
-        upload_to='profile_pic/kinesiologo/', null=True, blank=True, verbose_name="Foto de perfil")
+        upload_to='profile_pic/kinesiologo/', default="profile_pic/default.png", verbose_name="Foto de perfil")
     rut = models.CharField(max_length=9, null=False)
     status = models.BooleanField(default=False)
 
@@ -38,7 +39,7 @@ class Kinesiologo(models.Model):
 class Paciente(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_pic = models.ImageField(
-        upload_to='profile_pic/paciente/', null=True, blank=True, verbose_name="Foto de perfil")
+        upload_to='profile_pic/paciente/', default="profile_pic/default.png", verbose_name="Foto de perfil")
     description = models.TextField("descripcion", max_length=500, blank=True)
     cuidador = models.CharField(max_length=20, blank=True)
     telefono = models.IntegerField()

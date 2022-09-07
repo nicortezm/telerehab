@@ -9,7 +9,8 @@ Dashboard | {{user.first_name}} {{user.last_name}}
 {% block content %}
 <div class="container mt-3 d-flex justify-content-around animate__animated animate__fadeInLeft">
     <h5 class="h5-responsivee mt-3 mr-3">LISTADO KINESIOLOGOS</h5>
-    <a type="button" button class="btn-grad-normal text-white" href="{% url 'crear-paciente' %}">Crear Kinesiologo</a>
+    <a type="button" button class="btn-grad-normal text-white" href="{% url 'crear-kinesiologo' %}">Crear
+        Kinesiologo</a>
 </div>
 
 
@@ -33,9 +34,9 @@ Dashboard | {{user.first_name}} {{user.last_name}}
             <td>{{k.get_email}}</td>
             <td>
                 {% if k.status %}
-                <i class="fa-solid fa-square-check"></i>
+                <i class="fa-solid fa-square-check"></i> Activo
                 {% else %}
-                <i class="fa-solid fa-square-xmark"></i>
+                <i class="fa-solid fa-square-xmark"></i> Inactivo
                 {% endif %}
             </td>
             <td> <a class="btn-grad-normal" href="/">Detalles</a> </td>

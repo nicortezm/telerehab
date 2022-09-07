@@ -11,12 +11,10 @@ def profile_pic(request):
             else:
                 profile_obj = Paciente.objects.get(user=request.user)
 
-            if profile_obj.profile_pic:
-                pic = profile_obj.profile_pic
-            else:
-                pic = {}
+            pic = profile_obj.profile_pic
+
         else:
-            pic = {}
+            return {}
         return {'profile_pic': pic}
     else:
         return {}
