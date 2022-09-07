@@ -24,6 +24,10 @@ class Kinesiologo(models.Model):
         return self.user.first_name+" "+self.user.last_name
 
     @property
+    def get_email(self):
+        return self.user.email
+
+    @property
     def get_instance(self):
         return self
 

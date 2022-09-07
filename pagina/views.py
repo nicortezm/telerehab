@@ -120,8 +120,8 @@ def detalle_paciente_view(request, id):
 @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_dashboard_view(request):
-    # kinesiologos = models.Kinesiologo.objects.all()
-    # data = {
-    #     'kinesiologos': kinesiologos
-    # }
-    return render(request, 'pagina/admin_dashboard.html')
+    kinesiologos = models.Kinesiologo.objects.all()
+    data = {
+        'kinesiologos': kinesiologos
+    }
+    return render(request, 'pagina/admin_dashboard.html', data)
