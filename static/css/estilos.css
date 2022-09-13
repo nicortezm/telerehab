@@ -21,6 +21,43 @@ nav {
 }
 
 
+.row {
+  width: 100% !important; 
+}
+
+
+#fotoEj {
+  margin-left: 120px;
+}
+
+
+
+
+/* HIDE RADIO */
+[type=radio] { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + img {
+  cursor: pointer;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + img{
+  border-bottom: 5px solid #1d3557;
+}
+
+
+
+
+
+
+
+
 /* DURACION DEL FADE */
 .animate__animated.animate__fadeInLeft {
   --animate-duration: 1.7s;
@@ -31,6 +68,15 @@ nav {
   --animate-duration: 1.7s;
 }  
 
+.animate__animated.animate__backInDown {
+  --animate-duration: 2s;
+}
+
+
+
+
+
+
 
 @media (max-width: 600px){
   .h5-responsivee{
@@ -39,6 +85,14 @@ nav {
 
   .ejercicios {
     margin-top: 50px;
+  }
+
+  #fotoEj {
+    margin-left: 10px;
+    width: 93%;
+  }
+  .texto-area{
+    font-size: 10px;
   }
 }
 
