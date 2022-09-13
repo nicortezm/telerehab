@@ -16,6 +16,7 @@
   font-family: 'Roboto', sans-serif;
 }
 
+
 nav {
   background-color: var(--blue2);
 }
@@ -29,6 +30,19 @@ nav {
 #fotoEj {
   margin-left: 120px;
 }
+
+.adjunta {
+  margin-top: 15px;
+  height: 281.3px;
+  width: 500px;  
+}
+
+.adjunta2 {
+  margin-top: 13px;
+  height: 281.3px;
+  width: 500px;  
+}
+
 
 
 
@@ -91,8 +105,27 @@ nav {
     margin-left: 10px;
     width: 93%;
   }
+
   .texto-area{
     font-size: 10px;
+  }
+
+  .adjunta {
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 350px;  
+  }
+
+  .adjunta2 {
+    margin-left: 23px;
+    margin-top: 20px;
+    width: 350px; 
+    height: 200px; 
+  }
+  
+  #textFeedback{
+    margin-top: 10px;
+    margin-left: 24px;
   }
 }
 
