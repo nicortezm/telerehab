@@ -11,7 +11,7 @@ urlpatterns = [
          views.paciente_signup_view, name='crear-paciente'),
     path('dashboard', views.paciente_dashboard_view,
          name='paciente-dashboard'),
-    path('crear-kinesiologo', views.kinesiologo_signup_view,
+    path('crear-kinesiologo', views.crear_kinesiologo,
          name='crear-kinesiologo'),
     path('kinesiologo', views.kinesiologo_dashboard_view,
          name='kinesiologo-dashboard'),
@@ -25,5 +25,9 @@ urlpatterns = [
     path('cambiar-contrasena', PasswordChangeView.as_view(
         template_name='core/cambiar_contrasena.html', success_url='/', form_class=UserChangePasswordForm), name='cambiar-contrasena'),
     path('perfil', views.perfil, name='perfil'),
+    path('crear-ejercicio', views.crear_ejercicio_view,
+         name='crear-ejercicio'),
+    path('crear-categoria', views.crear_categoria_view,
+         name='crear-categoria'),
 
 ]

@@ -1,0 +1,96 @@
+{% extends "core/navbar.html" %}
+
+{% load static %}
+
+{% block title %}
+Crear Ejercicio | {{user.first_name}} {{user.last_name}}
+{% endblock title %}
+
+
+{% block content %}
+<div class="px-3 py-1">
+    <a class="text-uppercase text-dark" style="cursor: pointer;"><i class="fa-solid fa-angle-left"></i> Volver</a>
+</div>
+
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-center p-4 animate__animated animate__fadeInLeft">
+
+
+        <form class="w-75">
+
+            <div class="row">
+
+                <div class="col">
+
+                    <div class="row">
+
+                        <div class="form-group col-lg-6 col-sm-12 d-flex flex-column">
+                            <label class="form-control-label"><b>Nombre del Ejercicio</b>
+                                <span class="text-danger"> *</span>
+                            </label>
+                            <input class="form-control" required type="text" placeholder="Ingrese nombre">
+                        </div>
+
+                        <div class="form-group col d-flex flex-column">
+                            <label class="form-control-label" for="cat"><b>Categoria</b>
+                                <span class="text-danger"> *</span>
+
+                                <select class="form-control col-lg-6 col-sm-12 mt-2" name="cat" id="cat" required>
+                                    <option value="">Selecciona Ejercicio</option>
+                                    {% for categoria in categorias %}
+                                    <option value="{{categoria.id}}">{{categoria.nombre}}</option>
+                                    {% endfor %}
+
+                                </select>
+                        </div>
+                    </div>
+
+
+                    <div class="row justify-content-between text-left">
+
+                        <div class="form-group col-lg-6 col-sm-12 d-flex flex-column">
+                            <label class="form-control-label"> <b>Adjunta Videos</b>
+                                <span class="text-danger"> *</span>
+                            </label>
+
+                            <img style="object-fit: contain; cursor: pointer;" onclick="_upload()"
+                                class="img-fluid border border-dark" src=" {% static '/img/adjuntaEjercicio.png' %} "
+                                alt="foto">
+                            <input type="file" id="file_upload_id" style="display: none;"
+                                accept="image/png, image/jpeg, image/JPG" required>
+
+                        </div>
+
+                        <div class="form-group col-lg-6 col-sm-12 d-flex flex-column">
+                            <label class="form-control-label"> <b>Detalle del ejercicio</b>
+                                <span class="text-danger"> *</span>
+                            </label>
+                            <textarea style="resize: none;" class="form-control" cols="10" rows="10"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <button class="btn-grad-moon text-white" style="color: black;">Subir ejercicio</button>
+                    </div>
+                    <small class="d-flex justify-content-end p-2 text-danger">* Debes rellenar todos los campos</small>
+
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+
+<!-- FUNCION  PARA QUE AL TOCAR LA IMG SE HABRA EL INPUT FILE -->
+<script>
+    function _upload() {
+        document.getElementById('file_upload_id').click();
+    }
+</script>
+
+{% endblock content %}

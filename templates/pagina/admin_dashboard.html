@@ -47,8 +47,11 @@ Dashboard | {{user.first_name}} {{user.last_name}}
 
 </div>
 
-{% comment %} <div class="ejercicios d-flex mt-3 justify-content-around animate__animated animate__fadeInLeft">
-    <button class="btn-grad-blue text-white btn-md">Crea tu ejercicio <i class=" fas fa-pencil-alt"></i></button>
-    <button class="btn-grad-moon text-white btn-md">Ver tus ejercicios <i class="fas fa-eye"></i></button>
-</div> {% endcomment %}
+</div>
+<div class="container d-flex justify-content-around animate__animated animate__fadeInLeft">
+    <a href=" {% url 'crear-categoria' %} " class="btn-grad-blue text-white btn-md">Crea Categorias <i
+            class="fas fa-pencil-alt"></i></a>
+    {% comment %} <a class="btn-grad-moon text-white btn-md">Ver tus ejercicios <i class="fas fa-eye"></i></a>
+    {% endcomment %}
+</div>
 {% endblock content %}

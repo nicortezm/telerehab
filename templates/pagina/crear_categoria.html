@@ -1,0 +1,25 @@
+{% extends "core/navbar.html" %}
+
+{% load static %}
+
+{% block title %}
+Crear Categoria | {{user.first_name}} {{user.last_name}}
+{% endblock title %}
+
+{% block content %}
+
+<div class="d-flex justify-content-start p-4 animate__animated animate__fadeInLeft">
+    <div class="container-fluid">
+        <form class="w-100" method="POST" autocomplete="off" enctype="multipart/form-data">
+            {{categoriaForm}}
+            {% csrf_token %}
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn-grad-moon mr-3 text-white" style="color: black;">Crear
+                    Categoria</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<h1></h1>
+{% endblock content %}

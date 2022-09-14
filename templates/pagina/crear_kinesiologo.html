@@ -13,9 +13,7 @@ Crear Paciente | {{user.first_name}} {{user.last_name}}
 </div>
 
 <div class="d-flex justify-content-start p-4 animate__animated animate__fadeInLeft">
-
     <div class="container-fluid">
-
         <form class="w-100" method="POST" autocomplete="off" enctype="multipart/form-data">
             <div class="row">
                 <div class="col">
@@ -24,7 +22,7 @@ Crear Paciente | {{user.first_name}} {{user.last_name}}
 
                         <div class="form-group col-sm-6 flex-column d-flex">
                             <label class="form-control-label">
-                                <b>Nombre Paciente</b>
+                                <b>Nombre Kinesiologo</b>
                                 <span class="text-danger">*</span>
                             </label>
                             {{ userForm.first_name }}
@@ -32,19 +30,19 @@ Crear Paciente | {{user.first_name}} {{user.last_name}}
 
                         <div class="form-group col-sm-6 flex-column d-flex">
                             <label class="form-control-label">
-                                <b>Contraseña Paciente</b>
+                                <b>Contraseña Kinesiologo</b>
                                 <span class="text-danger">*</span>
                             </label>
 
                             {{ userForm.password }}
-                            <small class="text-danger mt-1">La contraseña debe tener más de 6 caracteres</small>
+                            <small class="text-muted mt-1">La contraseña debe tener más de 6 caracteres</small>
                         </div>
                     </div>
 
                     <div class="row justify-content-between text-left">
                         <div class="form-group col-sm-6 flex-column d-flex">
                             <label class="form-control-label">
-                                <b>Correo Paciente</b>
+                                <b>Correo Kinesiologo</b>
                                 <span class="text-danger">*</span>
                             </label>
                             {{ userForm.email }}
@@ -52,41 +50,27 @@ Crear Paciente | {{user.first_name}} {{user.last_name}}
 
                         <div class="form-group col-sm-6 flex-column d-flex">
                             <label class="form-label">
-                                <b>Cuidador</b>
+                                <b>RUT</b>
                                 <span class="text-danger">*</span>
                             </label>
-                            {{ pacienteForm.cuidador }}
+                            {{ kinesiologoForm.rut }}
                         </div>
                     </div>
 
                     <div class="row justify-content-between text-left">
                         <div class="form-group col-sm-6 flex-column d-flex">
                             <label class="form-control-label">
-                                <b>Número Telefonico</b>
+                                <b>¿Activo?</b>
                                 <span class="text-danger">*</span>
                             </label>
-                            {{pacienteForm.telefono}}
+                            {{kinesiologoForm.status}}
                         </div>
 
                         <div class="form-group col-sm-6 flex-column d-flex">
-                            <label class="form-label">
-                                <b>Comuna Paciente</b>
-                                <span class="text-danger">*</span>
-                            </label>
-                            {{pacienteForm.comuna}}
-                        </div>
-                    </div>
-
-                    <div class="row justify-content-between text-left">
-                        <div class="form-group col-sm-12 flex-column d-flex">
-                            <label class="form-control-label">
-                                <b>Descripcion del paciente</b>
-                                <span class="text-danger">*</span>
-                            </label>
-                            {{pacienteForm.description}}
 
                         </div>
                     </div>
+
                 </div>
 
                 <div class="col-sm">
@@ -96,19 +80,20 @@ Crear Paciente | {{user.first_name}} {{user.last_name}}
                     </div>
 
                     <div class="d-flex justify-content-center">
-                        <div class="btn-grad-normal" onclick="_upload()">
-                            Subir Archivo
+                        <div class="btn-grad-gray" onclick="_upload()">
+                            Subir Foto
                             <i class="fa-solid fa-upload ml-2"></i>
-                            {{pacienteForm.profile_pic}}
+                            {{kinesiologoForm.profile_pic}}
 
                         </div>
                     </div>
                 </div>
             </div>
+            <br><br><br>
 
-            <div class="d-flex justify-content-end mt-3">
-                <button type="submit" class="btn-grad-moon text-white">Crear
-                    Paciente</button>
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn-grad-moon mr-3 text-white" style="color: black;">Crear
+                    Kinesiologo</button>
             </div>
         </form>
     </div>

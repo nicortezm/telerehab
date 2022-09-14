@@ -1,7 +1,7 @@
-from cProfile import label
 from django.contrib.auth.forms import AuthenticationForm, UsernameField, PasswordChangeForm
 from django import forms
 from users import models
+from pagina import models as pag_model
 
 
 class UserForm(forms.ModelForm):
@@ -107,3 +107,15 @@ class UserChangePasswordForm(PasswordChangeForm):
             'placeholder': 'Ingrese su contraseña',
         }
     ))
+
+
+class CategoriaForm(forms.ModelForm):
+    class Meta:
+        model = pag_model.Categoria
+        fields = ['nombre', 'descripcion']
+        widgets = {'nombre': forms.TextInput(
+            attrs={'class': 'form-control', 'type': 'text',
+                   'placeholder': 'Ingrese nombre categoria'}
+        ), 'descripcion': forms.Textarea(
+            attrs={'class': 'form-control',
+                   'style': 'resize:none;', 'cols': '300', 'rows': '6'})}
