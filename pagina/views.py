@@ -103,8 +103,17 @@ def detalle_paciente_view(request, id):
 @login_required(login_url='login')
 @user_passes_test(is_kinesiologo)
 def crear_ejercicio_view(request):
-    categorias = Categoria.objects.all()
-    context = {"categorias": categorias}
+    ejercicioForm = forms.EjercicioForm()
+    if request.method == 'POST':
+        ejercicioForm = forms.EjercicioForm(request.POST, request.FILES)
+        if ejercicioForm.is_valid():
+            ejercicio = ejercicioForm.save(commit=False)
+            ejercicio.kinesiologo = Kinesiologo.objects.get(
+                user__id=request.user.id)
+            ejercicio.save()
+        return HttpResponseRedirect(reverse('login'))
+
+    context = {"ejercicioForm": ejercicioForm}
     return render(request, 'pagina/crear_ejercicio.html', context=context)
 
 # VISTA ADMIN
@@ -121,7 +130,7 @@ def crear_kinesiologo(request):
         kinesiologoForm = forms.KinesiologoForm(request.POST, request.FILES)
         if userForm.is_valid() and kinesiologoForm.is_valid():
             user = userForm.save(commit=False)
-            # El username se genera a partir del email
+            # El username se genera a partir del email de registro
             user.username = user.email.replace('@', '')
             user.set_password(user.password)
             user.save()

@@ -119,3 +119,24 @@ class CategoriaForm(forms.ModelForm):
         ), 'descripcion': forms.Textarea(
             attrs={'class': 'form-control',
                    'style': 'resize:none;', 'cols': '300', 'rows': '6'})}
+
+
+class EjercicioForm(forms.ModelForm):
+    class Meta:
+        model = pag_model.Ejercicio
+        fields = ['nombre', 'video', 'detalle', 'categoria']
+        widgets = {
+            'nombre': forms.TextInput(
+                attrs={'class': 'form-control', 'type': 'text',
+                       'placeholder': 'Ingrese nombre Ejercicio'}
+            ), 'video': forms.FileInput(
+                attrs={'type': 'file', 'id': 'file_upload_id', 'style': 'display: none;',
+                       'accept': 'video/mp4,video/x-m4v,video/*'}
+            ),
+            'detalle': forms.Textarea(
+                attrs={'class': 'form-control col-lg-6 col-sm-12 mt-2',
+                       'style': 'resize:none;', 'cols': '10', 'rows': '10'}),
+            'categoria': forms.Select(
+                attrs={'class': 'form-control', 'name': 'cat', 'id': 'cat'}
+            )
+        }

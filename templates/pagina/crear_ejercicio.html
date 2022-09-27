@@ -9,7 +9,8 @@ Crear Ejercicio | {{user.first_name}} {{user.last_name}}
 
 {% block content %}
 <div class="px-3 py-1">
-    <a class="text-uppercase text-dark" style="cursor: pointer;"><i class="fa-solid fa-angle-left"></i> Volver</a>
+    <a href="/" class="text-uppercase text-dark" style="cursor: pointer;"><i class="fa-solid fa-angle-left"></i>
+        Volver</a>
 </div>
 
 
@@ -17,8 +18,8 @@ Crear Ejercicio | {{user.first_name}} {{user.last_name}}
     <div class="d-flex justify-content-center p-4 animate__animated animate__fadeInLeft">
 
 
-        <form class="w-75">
-
+        <form class="w-100" method="POST" autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="row">
 
                 <div class="col">
@@ -29,20 +30,13 @@ Crear Ejercicio | {{user.first_name}} {{user.last_name}}
                             <label class="form-control-label"><b>Nombre del Ejercicio</b>
                                 <span class="text-danger"> *</span>
                             </label>
-                            <input class="form-control" required type="text" placeholder="Ingrese nombre">
+                            {{ejercicioForm.nombre}}
                         </div>
 
                         <div class="form-group col d-flex flex-column">
                             <label class="form-control-label" for="cat"><b>Categoria</b>
                                 <span class="text-danger"> *</span>
-
-                                <select class="form-control col-lg-6 col-sm-12 mt-2" name="cat" id="cat" required>
-                                    <option value="">Selecciona Ejercicio</option>
-                                    {% for categoria in categorias %}
-                                    <option value="{{categoria.id}}">{{categoria.nombre}}</option>
-                                    {% endfor %}
-
-                                </select>
+                                {{ ejercicioForm.categoria}}
                         </div>
                     </div>
 
@@ -57,20 +51,17 @@ Crear Ejercicio | {{user.first_name}} {{user.last_name}}
                             <img style="object-fit: contain; cursor: pointer;" onclick="_upload()"
                                 class="img-fluid border border-dark" src=" {% static '/img/adjuntaEjercicio.png' %} "
                                 alt="foto">
-                            <input type="file" id="file_upload_id" style="display: none;"
-                                accept="image/png, image/jpeg, image/JPG" required>
-
+                            {{ejercicioForm.video}}
                         </div>
 
                         <div class="form-group col-lg-6 col-sm-12 d-flex flex-column">
                             <label class="form-control-label"> <b>Detalle del ejercicio</b>
                                 <span class="text-danger"> *</span>
                             </label>
-                            <textarea style="resize: none;" class="form-control" cols="10" rows="10"
-                                required></textarea>
+                            {{ejercicioForm.detalle}}
+
                         </div>
                     </div>
-
                     <div class="d-flex justify-content-end">
                         <button class="btn-grad-moon text-white" style="color: black;">Subir ejercicio</button>
                     </div>
