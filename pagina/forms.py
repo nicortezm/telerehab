@@ -140,3 +140,33 @@ class EjercicioForm(forms.ModelForm):
                 attrs={'class': 'form-control', 'name': 'cat', 'id': 'cat'}
             )
         }
+
+
+class UpdateUserForm(forms.ModelForm):
+    username = forms.CharField(max_length=100,
+                               required=True,
+                               widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(required=True,
+                             widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = models.User
+        fields = ['username', 'email']
+
+
+class UpdateKinesiologoForm(forms.ModelForm):
+    profile_pic = forms.ImageField(widget=forms.FileInput(
+        attrs={'class': 'form-control-file'}))
+
+    class Meta:
+        model = models.Kinesiologo
+        fields = ['profile_pic']
+
+
+class UpdatePacienteForm(forms.ModelForm):
+    profile_pic = forms.ImageField(widget=forms.FileInput(
+        attrs={'class': 'form-control-file'}))
+
+    class Meta:
+        model = models.Paciente
+        fields = ['profile_pic']

@@ -11,94 +11,79 @@ Mi Perfil | {{user.first_name}} {{user.last_name}}
     <a class="text-uppercase text-dark text-decoration-none" href="/" style="cursor: pointer;"><i
             class="fa-solid fa-angle-left"></i> Volver</a>
 </div>
-{% comment %} <div class="animate__animated animate__backInDown container w-80 d-flex justify-content-center">
 
-    <div class=" card p-5 mt-5 shadow-lg">
-        <label class="form-label">Correo</label>
-        <input class="form-control" disabled type="text" placeholder="{{request.user.email}}">
-        <a class="btn-grad-moon btn-lg text-white" href="{% url 'cambiar-contrasena' %}">Cambiar
-            contraseña</a>
+<div class="d-flex justify-content-start p-4 animate__animated animate__fadeInLeft">
 
-    </div>
-</div> {% endcomment %}
-<div class="d-flex justify-content-start p-3 animate__animated animate__fadeInLeft">
-    <div class="row">
-        <div class="col">
+    <div class="container-fluid">
+
+        <form class="w-100">
 
             <div class="row">
-                <div class="form-group col-sm-6 flex-column d-flex">
-                    <label class="form-control-label"><b>Nombre Paciente</b>
-                    </label>
-                    <input class="form-control" required type="text" placeholder="Ingrese nombre"></div>
 
-                <div class="form-group  col-sm-6 flex-column d-flex">
-                    <label class="form-control-label"><b>Contraseña Paciente</b>
-                        <span class="text-danger"> *</span>
-                    </label>
-                    <input class="form-control" required type="text" placeholder="Ingrese contraseña">
-                    <small class="text-muted mt-1">La contraseña debe tener más de 6 caracteres</small>
+                <div class="col">
+
+                    <div class="row">
+                        <div class="form-group col d-flex flex-column">
+                            <label class="form-control-label"><b>Nombre Usuario</b>
+                                <span class="text-danger"> *</span>
+                            </label>
+                            <input class="form-control" required type="text" placeholder="Ingrese nombre"></div>
+                    </div>
+
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col flex-column d-flex">
+                            <label class="form-control-label"> <b>Correo Usuario</b>
+                                <span class="text-danger"> *</span>
+                            </label>
+                            <input class="form-control" required type="email" placeholder="Ingrese correo"></div>
+                    </div>
+
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col flex-column d-flex">
+                            <label class="form-control-label"> <b>Número Telefonico</b>
+                                <span class="text-danger"> *</span>
+                            </label>
+                            <input class="form-control" required type="text" placeholder="Ingrese Numero Telefonico">
+                        </div>
+                    </div>
+
                 </div>
-            </div>
 
-            <div class="row justify-content-between text-left">
-                <div class="form-group col-sm-6 flex-column d-flex">
-                    <label class="form-control-label"> <b>Correo Paciente</b>
+                <div class="col-sm">
+                    <div class="d-flex justify-content-center">
 
-                    </label>
-                    <input class="form-control" required type="email" placeholder="Ingrese correo"></div>
+                        <img style="object-fit: contain;" class="img-fluid p-5 rounded-circle"
+                            src="./img/fotoPerfil.png" alt="foto">
+                    </div>
 
-                <div class="form-group col-sm-6 flex-column d-flex">
-                    <label class="form-label"> <b>Cuidador</b>
 
-                    </label>
-                    <input class="form-control" required type="text" placeholder="Ingrese cuidador">
+                    <div class="d-flex justify-content-center">
+
+                        <div class="btn-grad-normal" onclick="_upload()">
+                            Subir Archivo
+                            <i class="fa-solid fa-upload ml-2"></i>
+                            <input type="file" id="file_upload_id" style="display: none;"
+                                accept="image/png, image/jpeg, image/JPG" required>
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
-
-            <div class="row justify-content-between text-left">
-                <div class="form-group col-sm-6 flex-column d-flex">
-                    <label class="form-control-label"> <b>Número Telefonico</b>
-
-                    </label>
-                    <input class="form-control" required type="text" placeholder="Ingrese Numero Telefonico"></div>
-
-                <div class="form-group col-sm-6 flex-column d-flex">
-                    <label class="form-label"> <b>Comuna Paciente</b>
-
-                    </label>
-                    <input class="form-control" required type="text" placeholder="Ingrese Comuna">
-                </div>
+            <div class="d-sm-flex justify-content-md-end justify-content-sm-center mt-5">
+                <button class="form-group btn-grad-moon text-white">Guardar Cambios</button>
             </div>
-
-
-            <div class="row justify-content-between text-left">
-                <div class="form-group col-sm-12 flex-column d-flex">
-                    <label class="form-control-label"> <b>Descripcion del paciente</b>
-                        <span class="text-danger"> *</span>
-                    </label>
-                    <textarea style="resize: none;" required class="form-control" cols="300" rows="6"></textarea>
-                </div>
-            </div>
-
-
-        </div>
-
-        <div class="col-sm">
-            <div class="d-flex justify-content-center">
-
-                <img style="object-fit: contain; cursor:pointer;" class="img-fluid p-5 rounded-circle"
-                    src="{{ profile_pic }}" alt="foto">
-            </div>
-
-
-        </div>
-
+        </form>
+        <button onclick="window.location.href='{% url 'cambiar-contrasena' %}'" class="btn-grad-moon text-white">Cambiar
+            Contraseña</button>
 
     </div>
-
-    <div class="d-flex justify-content-end ">
-        <button class="btn-grad-moon mr-3 text-white" style="color: black;">Crear Paciente</button>
-    </div>
-
 </div>
+
+
+<script>
+    function _upload() {
+        document.getElementById('file_upload_id').click();
+    }
+</script>
 {% endblock content %}

@@ -17,6 +17,7 @@ def home(request):
 
 
 def afterlogin_view(request):
+
     if is_paciente(request.user):
         return redirect('paciente-dashboard')
 
@@ -27,8 +28,26 @@ def afterlogin_view(request):
 
 
 def perfil(request):
-    # Codigo
+    if request.method == 'POST':
+        user_form = forms.UpdateUserForm(request.POST)
+        if is_kinesiologo(request.user):
+            profile_form = forms.UpdateKinesiologoForm(
+                request.POST, request.FILES)
+        else:
+            profile_form = forms.UpdatePacienteForm(
+                request.POST, request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return redirect(to='afterlogin')
+    else:
+        user_form = forms.UpdateUserForm(instance=request.user)
+        if is_kinesiologo(request.user):
+            profile_form = forms.UpdateKinesiologoForm()
+        else:
+            profile_form = forms.UpdatePacienteForm()
     return render(request, 'core/perfil.html')
+
 
 # VISTAS PACIENTE
 
@@ -156,11 +175,13 @@ def admin_dashboard_view(request):
 
 def crear_categoria_view(request):
     categoriaForm = forms.CategoriaForm()
-    mydict = {'categoriaForm': categoriaForm}
+
+    categorias = Categoria.objects.all()
+    mydict = {'categoriaForm': categoriaForm, 'categorias': categorias}
     if request.method == 'POST':
         categoriaForm = forms.CategoriaForm(request.POST)
         if categoriaForm.is_valid():
             categoria = categoriaForm.save(commit=False)
             categoria.save()
-        return HttpResponseRedirect(reverse('login'))
+        return HttpResponseRedirect(reverse('crear-categoria'))
     return render(request, 'pagina/crear_categoria.html', context=mydict)
