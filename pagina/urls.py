@@ -29,5 +29,7 @@ urlpatterns = [
          name='crear-ejercicio'),
     path('crear-categoria', views.crear_categoria_view,
          name='crear-categoria'),
+    path('detalle_paciente/<id>/crear-semana/',
+         views.crear_semana_view, name='crear-semana')
 
 ]

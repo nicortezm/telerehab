@@ -127,7 +127,7 @@ Detalle Paciente | {{paciente.get_name}}
 </div>
 <div class="row">
     <div class="col d-flex justify-content-end ">
-        <button class="btn btn-info rounded-pill">Crear Semana</button>
+        <a href="{% url 'crear-semana' paciente.id %}" class="btn btn-info rounded-pill">Crear Semana</a>
     </div>
     <div class="col"></div>
 </div>

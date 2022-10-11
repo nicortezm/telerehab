@@ -6,7 +6,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required, user_passes_test
 from users.views import is_paciente, is_kinesiologo, is_admin
 from users.models import Kinesiologo, Paciente, User
-from pagina.models import Categoria
+from pagina.models import Categoria, Ejercicio
 # Create your views here.
 
 # VISTAS GENERICAS
@@ -185,3 +185,13 @@ def crear_categoria_view(request):
             categoria.save()
         return HttpResponseRedirect(reverse('crear-categoria'))
     return render(request, 'pagina/crear_categoria.html', context=mydict)
+
+
+def crear_semana_view(request, id):
+    paciente = Paciente.objects.get(id=id)
+    ejercicios = Ejercicio.objects.all()
+    context = {
+        'paciente': paciente,
+        'ejercicios': ejercicios,
+    }
+    return render(request, 'pagina/crear_semana.html', context=context)
