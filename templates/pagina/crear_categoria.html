@@ -8,40 +8,42 @@ Crear Categoria | {{user.first_name}} {{user.last_name}}
 
 {% block content %}
 
-<div class="d-flex justify-content-start p-4 animate__animated animate__fadeInLeft">
-    <div class="container-fluid">
-        <form class="w-100" method="POST" autocomplete="off" enctype="multipart/form-data">
-            {{categoriaForm}}
-            {% csrf_token %}
-            <div class="d-flex justify-content-end">
-                <button type="submit" class="btn-grad-moon mr-3 text-white" style="color: black;">Crear
-                    Categoria</button>
-            </div>
-        </form>
-    </div>
-    <br>
-    <div class="container-fluid mt-1 d-flex justify-content-center animate__animated animate__fadeInRight">
+<div class="container-fluid">
 
-        <table class="table table-responsive table-striped 
-                        table-hover mt-3 w-auto shadow" style="border-radius: 8px">
+    <div class="row row-cols-1 row-cols-lg-2 g-0 p-4 animate__animated animate__fadeInLeft">
+        <div class="col-sm-6 col-md-8">
+            <form class="w-100" method="POST" autocomplete="off" enctype="multipart/form-data">
+                {{categoriaForm}}
+                {% csrf_token %}
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn-grad-moon mr-3 text-white" style="color: black;">Crear
+                        Categoria</button>
+                </div>
+            </form>
+        </div>
+        <br>
+        <div class="col-12 col-md-4 mt-1 d-inline-flex justify-content-center animate__animated animate__fadeInRight">
 
-            <tr>
-                <th scope="col"><b>id Categoria</b></th>
-                <th scope="col"><b>Nombre</b></th>
-                <th></th>
-                <th></th>
-            </tr>
-            {% for cat in categorias %}
-            <tr class="alert" role="alert">
-                <td scope="row">{{cat.id}}</td>
-                <td>{{cat.nombre}}</td>
-                <td><button class="btn-grad-normal">Detalles</button></td>
-                <td> <button class="btn-grad-red border border-none"><i class="fa-solid fa-trash-can"></i></button>
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
+            <table class="table table-striped table-responsive mt-3 w-auto" style="border-radius: 8px">
 
+                <tr>
+                    <th scope="col"><b>id Categoria</b></th>
+                    <th scope="col"><b>Nombre</b></th>
+                    <th scope="col">Operaciones</th>
+                    <th></th>
+                </tr>
+                {% for cat in categorias %}
+                <tr class="alert" role="alert">
+                    <td scope="row">{{cat.id}}</td>
+                    <td>{{cat.nombre}}</td>
+                    <td><button class="btn-grad-normal">Detalles</button></td>
+                    <td> <button class="btn-grad-red border border-none"><i class="fa-solid fa-trash-can"></i></button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+
+        </div>
     </div>
 </div>
 
