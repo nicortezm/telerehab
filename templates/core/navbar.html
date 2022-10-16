@@ -46,9 +46,9 @@
                 </div>
                 <a href="{% url 'perfil' %}">
                     {% if profile_pic %}
-                    <img class="img-thumbnail rounded mr-3" src="{{ profile_pic.url }}" width="50" alt="">
+                    <img class=" rounded mr-3" src="{{ profile_pic.url }}" width="50" alt="">
                     {% else %}
-                    <img class="img-thumbnail rounded mr-3" src="{% static 'img/fotoPerfil.png' %}" width="50" alt="">
+                    <img class=" rounded mr-3" src="{% static 'img/fotoPerfil.png' %}" width="50" alt="">
                     {% endif %}
                 </a>
                 <img class="img-fluid" src="{% static 'img/Logo-Duoc.png' %}" width="160">
@@ -56,8 +56,6 @@
             {% else %}
             <img class="img-fluid" src="{% static 'img/Logo-Duoc.png' %}" width="160">
             {% endif %}
-
-
 
         </nav>
     </header>
