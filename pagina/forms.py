@@ -143,20 +143,21 @@ class EjercicioForm(forms.ModelForm):
 
 
 class UpdateUserForm(forms.ModelForm):
-    username = forms.CharField(max_length=100,
-                               required=True,
-                               widget=forms.TextInput(attrs={'class': 'form-control'}))
-    email = forms.EmailField(required=True,
-                             widget=forms.TextInput(attrs={'class': 'form-control'}))
+    first_name = forms.CharField(max_length=100,
+                                 widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
 
     class Meta:
         model = models.User
-        fields = ['username', 'email']
+        fields = ['first_name', 'email']
 
 
 class UpdateKinesiologoForm(forms.ModelForm):
     profile_pic = forms.ImageField(widget=forms.FileInput(
         attrs={'class': 'form-control-file'}))
+    telefono = forms.CharField(required=True,
+                               widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = models.Kinesiologo

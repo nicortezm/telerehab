@@ -28,25 +28,21 @@ def afterlogin_view(request):
 
 
 def perfil(request):
+    user_form = forms.UpdateUserForm(instance=request.user)
     if request.method == 'POST':
-        user_form = forms.UpdateUserForm(request.POST)
-        if is_kinesiologo(request.user):
-            profile_form = forms.UpdateKinesiologoForm(
-                request.POST, request.FILES)
-        else:
-            profile_form = forms.UpdatePacienteForm(
-                request.POST, request.FILES)
-        if user_form.is_valid() and profile_form.is_valid():
+        user_form = forms.UpdateUserForm(request.POST, instance=request.user)
+        print(user_form.is_valid)
+        if user_form.is_valid():
             user_form.save()
-            profile_form.save()
+            user_dummy = User.objects.get(id=request.user.id)
+            user_dummy.username = user_form.cleaned_data['email'].replace(
+                '@', '')
+            user_dummy.save()
+            print(user_dummy.username,
+                  user_form.cleaned_data['email'].replace('@', ''))
             return redirect(to='afterlogin')
-    else:
-        user_form = forms.UpdateUserForm(instance=request.user)
-        if is_kinesiologo(request.user):
-            profile_form = forms.UpdateKinesiologoForm()
-        else:
-            profile_form = forms.UpdatePacienteForm()
-    return render(request, 'core/perfil.html')
+    mydict = {'userForm': user_form}  # , 'profileForm': profile_form
+    return render(request, 'core/perfil.html', context=mydict)
 
 
 # VISTAS PACIENTE

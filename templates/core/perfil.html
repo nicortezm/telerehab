@@ -16,7 +16,8 @@ Mi Perfil | {{user.first_name}} {{user.last_name}}
 
     <div class="container-fluid">
 
-        <form class="w-100">
+        <form class="w-100" method="post">
+            {% csrf_token %}
 
             <div class="row">
 
@@ -27,7 +28,9 @@ Mi Perfil | {{user.first_name}} {{user.last_name}}
                             <label class="form-control-label"><b>Nombre Usuario</b>
                                 <span class="text-danger"> *</span>
                             </label>
-                            <input class="form-control" required type="text" placeholder="Ingrese nombre"></div>
+                            {{userForm.first_name}}
+
+                        </div>
                     </div>
 
                     <div class="row justify-content-between text-left">
@@ -35,25 +38,29 @@ Mi Perfil | {{user.first_name}} {{user.last_name}}
                             <label class="form-control-label"> <b>Correo Usuario</b>
                                 <span class="text-danger"> *</span>
                             </label>
-                            <input class="form-control" required type="email" placeholder="Ingrese correo"></div>
+                            {{userForm.email}}
+                        </div>
                     </div>
-
+                    {% comment %}
                     <div class="row justify-content-between text-left">
                         <div class="form-group col flex-column d-flex">
                             <label class="form-control-label"> <b>Número Telefonico</b>
                                 <span class="text-danger"> *</span>
                             </label>
-                            <input class="form-control" required type="text" placeholder="Ingrese Numero Telefonico">
+                            {{userForm.telefono}}
                         </div>
-                    </div>
+                    </div> {% endcomment %}
 
                 </div>
-
+                {% if user.is_staff %}
+                {% comment %} Si el usuario es admin no puede cambiar foto, admin no tienen esta funcionalidad
+                {% endcomment %}
+                {% else %}
                 <div class="col-sm">
                     <div class="d-flex justify-content-center">
 
                         <img style="object-fit: contain;" class="img-fluid p-5 rounded-circle"
-                            src="./img/fotoPerfil.png" alt="foto">
+                            src=" {{ profile_pic.url }}" alt="foto">
                     </div>
 
 
@@ -63,15 +70,17 @@ Mi Perfil | {{user.first_name}} {{user.last_name}}
                             Subir Archivo
                             <i class="fa-solid fa-upload ml-2"></i>
                             <input type="file" id="file_upload_id" style="display: none;"
-                                accept="image/png, image/jpeg, image/JPG" required>
+                                accept="image/png, image/jpeg, image/JPG">
                         </div>
                     </div>
 
                 </div>
+                {% endif %}
+
 
             </div>
             <div class="d-sm-flex justify-content-md-end justify-content-sm-center mt-5">
-                <button class="form-group btn-grad-moon text-white">Guardar Cambios</button>
+                <button type="submit" class="form-group btn-grad-moon text-white">Guardar Cambios</button>
             </div>
         </form>
         <button onclick="window.location.href='{% url 'cambiar-contrasena' %}'" class="btn-grad-moon text-white">Cambiar
