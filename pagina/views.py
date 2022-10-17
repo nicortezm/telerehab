@@ -1,4 +1,6 @@
+from turtle import dot
 from django.shortcuts import render, redirect, reverse
+from django.urls import is_valid_path
 from . import forms
 from django.db.models import Sum
 from django.http import HttpResponseRedirect
@@ -29,19 +31,29 @@ def afterlogin_view(request):
 
 def perfil(request):
     user_form = forms.UpdateUserForm(instance=request.user)
+    if is_kinesiologo(request.user):
+        profile_form = forms.UpdateKinesiologoForm()
+    else:
+        profile_form = forms.UpdatePacienteForm()
     if request.method == 'POST':
         user_form = forms.UpdateUserForm(request.POST, instance=request.user)
-        print(user_form.is_valid)
+        if is_kinesiologo(request.user):
+            profile_form = forms.UpdateKinesiologoForm(
+                request.POST, request.FILES, instance=request.user.kinesiologo)
+        else:
+            profile_form = forms.UpdatePacienteForm(
+                request.POST, request.FILES, instance=request.user.paciente)
         if user_form.is_valid():
             user_form.save()
             user_dummy = User.objects.get(id=request.user.id)
             user_dummy.username = user_form.cleaned_data['email'].replace(
                 '@', '')
             user_dummy.save()
-            print(user_dummy.username,
-                  user_form.cleaned_data['email'].replace('@', ''))
-            return redirect(to='afterlogin')
-    mydict = {'userForm': user_form}  # , 'profileForm': profile_form
+        if profile_form.is_valid():
+            profile_form.save()
+            print("valido")
+        return redirect(to='afterlogin')
+    mydict = {'userForm': user_form, 'profileForm': profile_form}  #
     return render(request, 'core/perfil.html', context=mydict)
 
 

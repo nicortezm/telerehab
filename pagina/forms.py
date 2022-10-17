@@ -156,8 +156,9 @@ class UpdateUserForm(forms.ModelForm):
 class UpdateKinesiologoForm(forms.ModelForm):
     profile_pic = forms.ImageField(widget=forms.FileInput(
         attrs={'class': 'form-control-file'}))
-    telefono = forms.CharField(required=True,
-                               widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    telefono = forms.CharField(widget=forms.TextInput(attrs={'type': 'file', 'id': 'file_upload_id', 'style': 'display: none;',
+                                                             'accept': 'image/png, image/jpeg, image/JPG'}))
 
     class Meta:
         model = models.Kinesiologo
@@ -166,7 +167,8 @@ class UpdateKinesiologoForm(forms.ModelForm):
 
 class UpdatePacienteForm(forms.ModelForm):
     profile_pic = forms.ImageField(widget=forms.FileInput(
-        attrs={'class': 'form-control-file'}))
+        attrs={'type': 'file', 'id': 'file_upload_id', 'style': 'display: none;',
+               'accept': 'image/png, image/jpeg, image/JPG'}))
 
     class Meta:
         model = models.Paciente

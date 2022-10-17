@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'pagina',
-
+    'django_cleanup.apps.CleanupConfig',
 
 ]
 

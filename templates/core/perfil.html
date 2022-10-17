@@ -16,7 +16,7 @@ Mi Perfil | {{user.first_name}} {{user.last_name}}
 
     <div class="container-fluid">
 
-        <form class="w-100" method="post">
+        <form class="w-100" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
             <div class="row">
@@ -59,7 +59,7 @@ Mi Perfil | {{user.first_name}} {{user.last_name}}
                 <div class="col-sm">
                     <div class="d-flex justify-content-center">
 
-                        <img  style="width: 400px;height: auto; object-fit: cover;" class="img-fluid p-5 rounded-circle"
+                        <img style="width: 400px;height: auto; object-fit: cover;" class="img-fluid p-5 rounded-circle"
                             src=" {{ profile_pic.url }}" alt="foto">
                     </div>
 
@@ -69,8 +69,7 @@ Mi Perfil | {{user.first_name}} {{user.last_name}}
                         <div class="btn-grad-normal" onclick="_upload()">
                             Subir Archivo
                             <i class="fa-solid fa-upload ml-2"></i>
-                            <input type="file" id="file_upload_id" style="display: none;"
-                                accept="image/png, image/jpeg, image/JPG">
+                            {{profileForm.profile_pic}}
                         </div>
                     </div>
 
