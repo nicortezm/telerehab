@@ -6,6 +6,10 @@
 Dashboard | {{user.first_name}} {{user.last_name}}
 {% endblock title %}
 
+{% block cobreloa %}
+    
+<link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css' %} ">
+{% endblock cobreloa %}
 {% block content %}
 
 
@@ -32,19 +36,21 @@ Dashboard | {{user.first_name}} {{user.last_name}}
     </div>
 
 
-    <div class="col p-5 mt-5 ">
+    <div class="col ml-4 mt-5">
+        <div class="row shadow-lg row-dashboard rounded mt-5">
 
-        <div class="row shadow-lg p-5 rounded">
-
-            <div class="col text-center mt-2">
+            <div class="col-sm text-center mt-2 p-4 rounded shadow-lg">
                 <h5>Pacientes Activos: </h5>
                 <span class="px-2 ml-2" style="border: 3px solid black;">1</span>
             </div>
 
-            <div class="col text-center mt-2">
+            <div class="col-1"></div>
+            
+            <div class="col-sm text-center mt-2 p-4 rounded shadow-lg">
                 <h5>Kinesiologos Activos: </h5>
-                <span class="px-2 ml-2" style="border: 3px solid black;">1</span>
-            </div>        
+                <span class="px-3 ml-2" style="border: 3px solid black;">1123</span>
+            </div>   
+    
         </div>
     </div>
 </div>

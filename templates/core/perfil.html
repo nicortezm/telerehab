@@ -59,14 +59,17 @@ Mi Perfil | {{user.first_name}} {{user.last_name}}
                 <div class="col-sm">
                     <div class="d-flex justify-content-center">
 
-                        <img style="width: 400px;height: auto; object-fit: cover;" class="img-fluid p-5 rounded-circle"
-                            src=" {{ profile_pic.url }}" alt="foto">
+                        <img style="width: 400px;height: auto; object-fit: cover;" 
+                             id="imagenPrevisualizacion"  
+                             class="img-fluid p-5 rounded-circle"
+                             src=" {{ profile_pic.url }}" alt="foto">
+
                     </div>
 
 
                     <div class="d-flex justify-content-center">
 
-                        <div class="btn-grad-normal" onclick="_upload()">
+                        <div class="btn-grad-normal" onchange="subirArchivo(event)" onclick="_upload()">
                             Subir Archivo
                             <i class="fa-solid fa-upload ml-2"></i>
                             {{profileForm.profile_pic}}
@@ -92,6 +95,16 @@ Mi Perfil | {{user.first_name}} {{user.last_name}}
 <script>
     function _upload() {
         document.getElementById('file_upload_id').click();
+    }
+
+    const subirArchivo = function(event){
+        const output = document.getElementById('imagenPrevisualizacion')
+
+        console.log( output )
+        output.src = URL.createObjectURL(event.target.files[0])
+        output.onload = function() {
+        URL.revokeObjectURL(output.src) // free memory
+        }
     }
 </script>
 {% endblock content %}

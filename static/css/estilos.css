@@ -43,6 +43,12 @@ nav {
   width: 500px;  
 }
 
+.row-dashboard {
+  padding: 40px; 
+}
+
+
+
 
 
 
@@ -126,6 +132,11 @@ nav {
   #textFeedback{
     margin-top: 10px;
     margin-left: 24px;
+  }
+
+
+  .row-dashboard {
+    padding: 20px; 
   }
 }
 
