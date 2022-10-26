@@ -1,4 +1,3 @@
-from turtle import dot
 from django.shortcuts import render, redirect, reverse
 from django.urls import is_valid_path
 from . import forms
@@ -181,7 +180,7 @@ def admin_dashboard_view(request):
     return render(request, 'pagina/admin_dashboard.html', data)
 
 
-def crear_categoria_view(request):
+def crud_categoria_view(request):
     categoriaForm = forms.CategoriaForm()
 
     categorias = Categoria.objects.all()

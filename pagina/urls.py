@@ -27,8 +27,8 @@ urlpatterns = [
     path('perfil', views.perfil, name='perfil'),
     path('crear-ejercicio', views.crear_ejercicio_view,
          name='crear-ejercicio'),
-    path('crear-categoria', views.crear_categoria_view,
-         name='crear-categoria'),
+    path('categorias', views.crud_categoria_view,
+         name='categorias'),
     path('detalle_paciente/<id>/crear-semana/',
          views.crear_semana_view, name='crear-semana')
 
