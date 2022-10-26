@@ -7,7 +7,7 @@ Dashboard | {{user.first_name}} {{user.last_name}}
 {% endblock title %}
 
 {% block cobreloa %}
-    
+
 <link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css' %} ">
 {% endblock cobreloa %}
 {% block content %}
@@ -17,22 +17,22 @@ Dashboard | {{user.first_name}} {{user.last_name}}
     <div class="col-lg-5 mt-5">
 
         <div class="row ml-3 p-2 d-flex justify-content-center">
-            <button class="btn-grad-moon btn-lg text-white">
+            <a href="{% url 'crear-kinesiologo' %}" class="btn-grad-moon btn-lg text-white">
                 Gestion de Kinesiologos
-            </button>
-        </div> 
+            </a>
+        </div>
+
+        <div class="row  ml-3 p-2 d-flex justify-content-center">
+            <a href="{% url 'categorias' %}" class="btn-grad-moon btn-lg text-white">
+                Gestion de Categorias
+            </a>
+        </div>
 
         <div class="row  ml-3 p-2 d-flex justify-content-center">
             <button class="btn-grad-moon btn-lg text-white">
-                Gestion de Categorias   
+                Gestion de Pacientes
             </button>
-        </div> 
-
-        <div class="row  ml-3 p-2 d-flex justify-content-center">
-            <button class="btn-grad-moon btn-lg text-white">
-                Gestion de Pacientes  
-            </button> 
-        </div> 
+        </div>
     </div>
 
 
@@ -45,18 +45,15 @@ Dashboard | {{user.first_name}} {{user.last_name}}
             </div>
 
             <div class="col-1"></div>
-            
+
             <div class="col-sm text-center mt-2 p-4 rounded shadow-lg">
                 <h5>Kinesiologos Activos: </h5>
                 <span class="px-3 ml-2" style="border: 3px solid black;">1123</span>
-            </div>   
-    
+            </div>
+
         </div>
     </div>
 </div>
 
 
 {% endblock content %}
-
-
-
