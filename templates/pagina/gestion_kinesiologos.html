@@ -4,10 +4,17 @@
 {% load static %}
 
 {% block title %}
-Dashboard | {{user.first_name}} {{user.last_name}}
+Gestión Kinesiologos | {{user.first_name}} {{user.last_name}}
 {% endblock title %}
 
 {% block content %}
+
+<div class="px-3 py-1">
+    <a href="/" class="text-uppercase text-dark" style="cursor: pointer;"><i class="fa-solid fa-angle-left"></i>
+        Volver</a>
+</div>
+
+
 <div class="container mt-3 d-flex justify-content-around animate__animated animate__fadeInLeft">
     <h5 class="h5-responsivee mt-3 mr-3">LISTADO KINESIOLOGOS</h5>
     <a type="button" button class="btn-grad-normal text-white" href="{% url 'crear-kinesiologo' %}">Crear
@@ -49,10 +56,5 @@ Dashboard | {{user.first_name}} {{user.last_name}}
 </div>
 
 </div>
-<div class="container d-flex justify-content-around animate__animated animate__fadeInLeft">
-    <a href=" {% url 'crear-categoria' %} " class="btn-grad-blue text-white btn-md">Crea Categorias <i
-            class="fas fa-pencil-alt"></i></a>
-    {% comment %} <a class="btn-grad-moon text-white btn-md">Ver tus ejercicios <i class="fas fa-eye"></i></a>
-    {% endcomment %}
-</div>
+
 {% endblock content %}

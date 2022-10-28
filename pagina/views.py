@@ -5,7 +5,7 @@ from django.db.models import Sum
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required, user_passes_test
-from users.views import is_paciente, is_kinesiologo, is_admin
+from users.views import is_paciente, is_kinesiologo, is_admin, is_admin_or_kinesiologo
 from users.models import Kinesiologo, Paciente, User
 from pagina.models import Categoria, Ejercicio
 # Create your views here.
@@ -13,6 +13,7 @@ from pagina.models import Categoria, Ejercicio
 # VISTAS GENERICAS
 
 
+@login_required(login_url='login')
 def home(request):
     return render(request, 'core/home.html')  # El inicio es el login
 
@@ -28,6 +29,7 @@ def afterlogin_view(request):
         return redirect('admin-dashboard')
 
 
+@login_required(login_url='login')
 def perfil(request):
     user_form = forms.UpdateUserForm(instance=request.user)
     if is_kinesiologo(request.user):
@@ -56,9 +58,8 @@ def perfil(request):
     return render(request, 'core/perfil.html', context=mydict)
 
 
-# VISTAS PACIENTE
-
-
+@login_required(login_url='login')
+@user_passes_test(is_admin_or_kinesiologo)
 def paciente_signup_view(request):
     # Asignamos los valores del formulario web al formulario django
     userForm = forms.UserForm()
@@ -96,11 +97,13 @@ def paciente_dashboard_view(request):
 # VISTAS KINESIOLOGO
 
 @login_required(login_url='login')
-@user_passes_test(is_kinesiologo)
+@user_passes_test(is_admin_or_kinesiologo)
 def kinesiologo_dashboard_view(request):
-
-    pacientes = Paciente.objects.filter(
-        kinesiologo_id__user_id=request.user.id).values_list('comuna', 'telefono', 'cuidador')
+    if request.user.is_staff:
+        pacientes = Paciente.objects.all().values_list('comuna', 'telefono', 'cuidador')
+    else:
+        pacientes = Paciente.objects.filter(
+            kinesiologo_id__user_id=request.user.id).values_list('comuna', 'telefono', 'cuidador')
     usuarios = list()
     for p in pacientes.values():
 
@@ -173,13 +176,17 @@ def crear_kinesiologo(request):
 @login_required(login_url='login')
 @user_passes_test(is_admin)
 def admin_dashboard_view(request):
-    kinesiologos = Kinesiologo.objects.all()
+    pacientes = Paciente.objects.all().count()
+    kinesiologos = Kinesiologo.objects.all().count()
     data = {
-        'kinesiologos': kinesiologos
+        'kinesiologos': kinesiologos,
+        'pacientes': pacientes
     }
     return render(request, 'pagina/admin_dashboard.html', data)
 
 
+@login_required(login_url='login')
+@user_passes_test(is_admin)
 def crud_categoria_view(request):
     categoriaForm = forms.CategoriaForm()
 
@@ -194,6 +201,8 @@ def crud_categoria_view(request):
     return render(request, 'pagina/crear_categoria.html', context=mydict)
 
 
+@login_required(login_url='login')
+@user_passes_test(is_kinesiologo)
 def crear_semana_view(request, id):
     paciente = Paciente.objects.get(id=id)
     ejercicios = Ejercicio.objects.all()
@@ -202,3 +211,24 @@ def crear_semana_view(request, id):
         'ejercicios': ejercicios,
     }
     return render(request, 'pagina/crear_semana.html', context=context)
+
+
+@login_required(login_url='login')
+@user_passes_test(is_kinesiologo)
+def kinesiologo_mis_videos(request):
+    ejercicios = Ejercicio.objects.filter(
+        kinesiologo_id__user_id=request.user.id)
+    context = {
+        'ejercicios': ejercicios
+    }
+    return render(request, 'pagina/kinesiologo_lista_videos.html', context)
+
+
+@login_required(login_url='login')
+@user_passes_test(is_admin_or_kinesiologo)
+def gestion_kinesiologos(request):
+    kinesiologos = Kinesiologo.objects.all()
+    data = {
+        'kinesiologos': kinesiologos
+    }
+    return render(request, 'pagina/gestion_kinesiologos.html', data)

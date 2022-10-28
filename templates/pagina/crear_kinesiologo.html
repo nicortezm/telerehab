@@ -3,12 +3,12 @@
 {% load static %}
 
 {% block title %}
-Crear Paciente | {{user.first_name}} {{user.last_name}}
+Crear Kinesiologo | {{user.first_name}} {{user.last_name}}
 {% endblock title %}
 
 {% block content %}
 <div class="px-3 py-1">
-    <a class="text-uppercase text-dark text-decoration-none" href="/" style="cursor: pointer;"><i
+    <a class="text-uppercase text-dark text-decoration-none" href="{% url 'gestion-kinesiologos' %} " style="cursor: pointer;"><i
             class="fa-solid fa-angle-left"></i> Volver</a>
 </div>
 

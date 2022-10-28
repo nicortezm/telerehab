@@ -14,3 +14,10 @@ def is_paciente(user):
 
 def is_admin(user):
     return user.is_staff
+
+
+def is_admin_or_kinesiologo(user):
+    if user.groups.filter(name='KINESIOLOGO').exists() or user.is_staff:
+        return True
+    else:
+        return False

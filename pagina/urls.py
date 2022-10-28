@@ -30,6 +30,9 @@ urlpatterns = [
     path('categorias', views.crud_categoria_view,
          name='categorias'),
     path('detalle_paciente/<id>/crear-semana/',
-         views.crear_semana_view, name='crear-semana')
+         views.crear_semana_view, name='crear-semana'),
+    path('mis-videos', views.kinesiologo_mis_videos, name='mis-videos'),
+    path('gestion-kinesiologos', views.gestion_kinesiologos,
+         name='gestion-kinesiologos'),
 
 ]

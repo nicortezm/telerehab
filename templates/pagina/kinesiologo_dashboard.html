@@ -44,7 +44,8 @@ Dashboard | {{user.first_name}} {{user.last_name}}
 <div class="container d-flex justify-content-around animate__animated animate__fadeInLeft">
     <a href=" {% url 'crear-ejercicio' %} " class="btn-grad-blue text-white btn-md">Crea tu ejercicio <i
             class="fas fa-pencil-alt"></i></a>
-    <a class="btn-grad-moon text-white btn-md">Ver tus ejercicios <i class="fas fa-eye"></i></a>
+    <a href="{% url 'mis-videos' %}" class="btn-grad-moon text-white btn-md">Ver tus ejercicios <i
+            class="fas fa-eye"></i></a>
 </div>
 
 {% endblock content %}
