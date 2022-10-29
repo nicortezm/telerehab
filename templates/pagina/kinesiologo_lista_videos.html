@@ -6,41 +6,36 @@
 Mis videos | {{user.first_name}} {{user.last_name}}
 {% endblock title %}
 
+{% block customcss %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/mis_videos.css' %} ">
+
+{% endblock customcss %}
 {% block content %}
 
-<style>
-  div.gallery {
-    margin: 5px;
-    border: 1px solid #ccc;
-    float: left;
-    width: 180px;
-  }
 
-  div.gallery:hover {
-    border: 1px solid #777;
-  }
-
-  div.gallery img {
-    width: 100%;
-    height: auto;
-  }
-
-  div.desc {
-    padding: 15px;
-    text-align: center;
-  }
-</style>
 </head>
 
 <body>
-  
+
+  <div class="px-3 py-1">
+    <a href="/" class="text-uppercase text-dark" style="cursor: pointer;"><i class="fa-solid fa-angle-left"></i>
+      Volver</a>
+  </div>
+
   {% for ejercicio in ejercicios  %}
 
   <div class="gallery">
-    <a target="_blank" href="img_5terre.jpg">
-      <img src="{{ejercicio.video_thumbnail.url}}" alt="{{ejercicio.nombre}}" width="600" height="400">
-    </a>
+    <video id="my-video" class="video-js" controls preload="none" poster="{{ejercicio.video_thumbnail.url}}"
+      data-setup="()">
+
+      <source src="{{ejercicio.video.url}}" type="video/mp4">
+
+    </video>
     <div class="desc">{{ejercicio.detalle}}</div>
   </div>
+
+
+
+
   {% endfor %}
   {% endblock content %}

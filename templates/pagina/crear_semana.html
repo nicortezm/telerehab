@@ -9,100 +9,99 @@ Crear Semana | {{user.first_name}} {{user.last_name}}
 {% block content %}
 <div class="row">
 
-    <div class="col">
-        <div class="px-3 py-1">
-            <a class="text-uppercase text-dark text-decoration-none" href="{% url 'kinesiologo-dashboard'  %} "
-                style="cursor: pointer;"><i class="fa-solid fa-angle-left"></i> Volver</a>
-        </div>
+  <div class="col">
+    <div class="px-3 py-1">
+      <a class="text-uppercase text-dark text-decoration-none" href="{% url 'kinesiologo-dashboard'  %} "
+        style="cursor: pointer;"><i class="fa-solid fa-angle-left"></i> Volver</a>
+    </div>
+  </div>
+
+  <div class="col-sm">
+    <div class="text-right ">
+      Nombre Paciente: {{paciente.get_name}}
+      {% if paciente.profile_pic %}
+      <img class="img-thumbnail rounded m-3" src="{{paciente.profile_pic.url}}" width="50" alt="">
+      {% else %}
+      <img class="img-thumbnail rounded m-3" src="{% static 'img/fotoPerfil.png' %}" width="50" alt="">
+      {% endif %}
     </div>
 
-    <div class="col-sm">
-        <div class="text-right ">
-            Nombre Paciente: {{paciente.get_name}}
-            {% if paciente.profile_pic %}
-            <img class="img-thumbnail rounded m-3" src="{{paciente.profile_pic.url}}" width="50" alt="">
-            {% else %}
-            <img class="img-thumbnail rounded m-3" src="{% static 'img/fotoPerfil.png' %}" width="50" alt="">
-            {% endif %}
-        </div>
-
-    </div>
+  </div>
 </div>
 <div class="container-fluid">
 
 
-    <div class="row">
+  <div class="row">
 
-        <div class="col-4-sm ml-5 animate__animated animate__backInDown ">
-
-            <form>
-
-                <h5>Nombre Semana</h5>
-                <input class="form-control" type="text" placeholder="Ingrese semana" required> <br>
-                <button class="btn-grad-normal" type="submit">Crear Semana</button>
-        </div>
-
-        <div class="col-8-sm">
-            <div class="d-flex justify-content-center p-4 animate__animated animate__fadeInLeft">
-
-                <div class="col px-4 py-1">
-                    <div class="accordion" id="accordion">
-
-                        <div class="">
-
-                            <div class="" id="headingOne">
-                                <h3 class="mb-0">
-                                    <button id="activate" type="button" onclick="show(); blur();"
-                                        class="btn btn-link text-decoration-none" data-toggle="collapse"
-                                        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        <i class="fas fa-angle-left"> &nbsp;</i> LISTA EJERCICIOS
-                                    </button>
-                                </h3>
-                            </div>
-
-                            <div id="collapseOne" class="collapse p-3" aria-labelledby="headingOne">
-
-                                <div class="d-flex justify-content-around">
-                                    <input class="btn-grad-red" onclick="selects()" type="button"
-                                        value="Añadir Todos" />
-                                    <input class="btn-grad-normal" onclick="deSelect()" type="button"
-                                        value="Quitar Todos" />
-                                </div>
-
-                                <!-- AQUI EMPIEZA EL FOR -->
-                                {% for ejercicio in ejercicios %}
+    <div class="col-4-sm ml-5 animate__animated animate__backInDown ">
 
 
-                                <div class="row d-flex p-2">
-                                    <img class="p-3" src="{{ ejercicio.video_thumbnail.url }}" alt=""
-                                        style="width: 400px;height: auto; object-fit: cover;">
-                                    <div class="col-sm mt-3">
-                                        <h3>{{ ejercicio.nombre }}</h3>
-                                        <h6>{{ ejercicio.detalle }}</h6>
-                                    </div>
-                                </div>
 
-                                <div class="form-check d-flex justify-content-center mb-2">
-                                    <input class="form-check-input" type="checkbox" value="" name="check">
-                                </div>
-                                {% endfor %}
-                                <!-- Aqui termina el for -->
+      <h5>Nombre Semana</h5>
+      <input form="formulario_categorias" class="form-control" type="text" placeholder="Ingrese semana" required> <br>
+      <button form="formulario_categorias" class="btn-grad-normal" type="submit">Crear Semana</button>
+    </div>
+    <form id="formulario_categorias">
+      <div class="col-8-sm">
+        <div class="d-flex justify-content-center p-4 animate__animated animate__fadeInLeft">
+
+          <div class="col px-4 py-1">
+            <div class="accordion" id="accordion">
+
+              <div class="">
+
+                <div class="collapse show" id="headingOne">
+                  <h3 class="mb-0">
+                    <button id="activate" type="button" onclick="show(); blur();"
+                      class="btn btn-link text-decoration-none " data-toggle="collapse" data-target="#collapseOne"
+                      aria-expanded="true" aria-controls="collapseOne">
+                      <i class="fas fa-angle-left"> &nbsp;</i> LISTA EJERCICIOS
+                    </button>
+                  </h3>
+                </div>
+
+                <div id="collapseOne" class="collapse p-3" aria-labelledby="headingOne">
+
+                  <div class="d-flex justify-content-around">
+                    <input class="btn-grad-red" onclick="selects()" type="button" value="Añadir Todos" />
+                    <input class="btn-grad-normal" onclick="deSelect()" type="button" value="Quitar Todos" />
+                  </div>
+
+                  <!-- AQUI EMPIEZA EL FOR -->
+                  {% for ejercicio in ejercicios %}
 
 
-                            </div>
-
-                        </div>
-
-                        </form>
-
+                  <div class="row d-flex p-2">
+                    <img class="p-3" src="{{ ejercicio.video_thumbnail.url }}" alt=""
+                      style="width: 400px;height: auto; object-fit: cover;">
+                    <div class="col-sm mt-3">
+                      <h3>{{ ejercicio.nombre }}</h3>
+                      <h6>{{ ejercicio.detalle }}</h6>
                     </div>
+                  </div>
+
+                  <div class="form-check d-flex justify-content-center mb-2">
+                    <input class="form-check-input" type="checkbox" value="" name="check">
+                  </div>
+                  {% endfor %}
+                  <!-- Aqui termina el for -->
 
 
                 </div>
+
+              </div>
+
+
             </div>
 
+
+
+          </div>
         </div>
-    </div>
+
+      </div>
+    </form>
+  </div>
 
 </div>
 
@@ -114,29 +113,29 @@ Crear Semana | {{user.first_name}} {{user.last_name}}
 
 
 <script>
-    //Funcion para cambiar el icono con un click
-    function show() {
-        $('#activate').find("i").toggleClass('fa-solid fa-angle-right');
-    }
+  //Funcion para cambiar el icono con un click
+  function show() {
+    $('#activate').find("i").toggleClass('fa-solid fa-angle-right');
+  }
 </script>
 
 <script>
-    function selects() {
-        const selec = document.getElementsByName('check');
-        for (let i = 0; i < selec.length; i++) {
-            if (selec[i].type == 'checkbox')
-                selec[i].checked = true;
-        }
+  function selects() {
+    const selec = document.getElementsByName('check');
+    for (let i = 0; i < selec.length; i++) {
+      if (selec[i].type == 'checkbox')
+        selec[i].checked = true;
     }
+  }
 
-    function deSelect() {
-        const selec = document.getElementsByName('check');
-        for (let i = 0; i < selec.length; i++) {
-            if (selec[i].type == 'checkbox')
-                selec[i].checked = false;
+  function deSelect() {
+    const selec = document.getElementsByName('check');
+    for (let i = 0; i < selec.length; i++) {
+      if (selec[i].type == 'checkbox')
+        selec[i].checked = false;
 
-        }
     }
+  }
 </script>
 
 {% endblock content %}
