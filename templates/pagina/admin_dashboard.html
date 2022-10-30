@@ -1,55 +1,63 @@
-{% extends 'core/navbar.html' %}
+{% extends 'core/navbar.html' %} {% load static %} {% block title %} Dashboard |
+{{user.first_name}} {{user.last_name}} {% endblock title %} {% block content %}
 
-{% load static %}
-
-{% block title %}
-Dashboard | {{user.first_name}} {{user.last_name}}
-{% endblock title %}
-
-{% block content %}
-
-
-<div class="row row-cols-1 row-cols-lg-2 g-0 mt-3 animate__animated animate__backInDown">
+<div class="container-fluid">
+  <div
+    class="row row-cols-1 row-cols-lg-2 g-0 mt-3 animate__animated animate__backInDown"
+  >
     <div class="col-lg-5 mt-5">
-
-        <div class="row ml-3 p-2 d-flex justify-content-center">
-            <a href="{% url 'gestion-kinesiologos' %}" class="btn-grad-moon btn-lg text-white">
-                Gestion de Kinesiologos
-            </a>
+      <div class="card border border-dark">
+        <div class="list-group">
+          <a
+            href="{% url 'gestion-kinesiologos' %}"
+            class="list-group-item list-group-item-action"
+            >Gestion de Kinesiologos</a
+          >
+          <a
+            href="{% url 'categorias' %}"
+            class="list-group-item list-group-item-action"
+            >Gestion de Categorias</a
+          >
+          <a
+            href="{% url 'kinesiologo-dashboard' %}"
+            class="list-group-item list-group-item-action"
+            >Gestion de Pacientes</a
+          >
         </div>
-
-        <div class="row  ml-3 p-2 d-flex justify-content-center">
-            <a href="{% url 'categorias' %}" class="btn-grad-moon btn-lg text-white">
-                Gestion de Categorias
-            </a>
-        </div>
-
-        <div class="row  ml-3 p-2 d-flex justify-content-center">
-            <a href="{% url 'kinesiologo-dashboard' %}" class="btn-grad-moon btn-lg text-white">
-                Gestion de Pacientes
-            </a>
-        </div>
+      </div>
     </div>
 
-
-    <div class="col ml-4 mt-5">
-        <div class="row shadow-lg row-dashboard rounded mt-5">
-
-            <div class="col-sm text-center mt-2 p-4 rounded shadow-lg">
-                <h5>Pacientes Activos: </h5>
-                <span class="px-2 ml-2" style="border: 3px solid black;">{{ pacientes }}</span>
+    <div class="col-xl-3 col-sm-6 col-12 mt-5 ml-5">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between px-md-1">
+            <div class="align-self-center">
+              <i class="fa-solid fa-user text-info fa-3x"></i>
             </div>
-
-            <div class="col-1"></div>
-
-            <div class="col-sm text-center mt-2 p-4 rounded shadow-lg">
-                <h5>Kinesiologos Activos: </h5>
-                <span class="px-3 ml-2" style="border: 3px solid black;">{{ kinesiologos }}</span>
+            <div class="text-end">
+              <h3>{{ pacientes }}</h3>
+              <p class="mb-0 font-weight-bold">Pacientes</p>
             </div>
-
+          </div>
         </div>
+      </div>
     </div>
+    <div class="col-xl-3 col-sm-6 col-12 mt-5 ml-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between px-md-1">
+            <div class="align-self-center">
+              <i class="fa-solid fa-stethoscope text-danger fa-3x"></i>
+            </div>
+            <div class="text-end">
+              <h3>{{ kinesiologos }}</h3>
+              <p class="mb-0 font-weight-bold">Kinesiologos</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
 
 {% endblock content %}
