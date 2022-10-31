@@ -154,11 +154,12 @@ class UpdateUserForm(forms.ModelForm):
 
 
 class UpdateKinesiologoForm(forms.ModelForm):
-    profile_pic = forms.ImageField(widget=forms.FileInput(
-        attrs={'class': 'form-control-file'}))
+    profile_pic = forms.ImageField(required=False, widget=forms.FileInput(
+        attrs={'type': 'file', 'id': 'file_upload_id', 'style': 'display: none;',
+               'accept': 'image/png, image/jpeg, image/JPG'}))
 
-    telefono = forms.CharField(widget=forms.TextInput(attrs={'type': 'file', 'id': 'file_upload_id', 'style': 'display: none;',
-                                                             'accept': 'image/png, image/jpeg, image/JPG'}))
+    telefono = forms.CharField(required=False, widget=forms.TextInput(attrs={'type': 'file', 'id': 'file_upload_id', 'style': 'display: none;',
+                                                                             'accept': 'image/png, image/jpeg, image/JPG'}))
 
     class Meta:
         model = models.Kinesiologo
@@ -166,10 +167,21 @@ class UpdateKinesiologoForm(forms.ModelForm):
 
 
 class UpdatePacienteForm(forms.ModelForm):
-    profile_pic = forms.ImageField(widget=forms.FileInput(
+    profile_pic = forms.ImageField(required=False, widget=forms.FileInput(
         attrs={'type': 'file', 'id': 'file_upload_id', 'style': 'display: none;',
                'accept': 'image/png, image/jpeg, image/JPG'}))
 
     class Meta:
         model = models.Paciente
         fields = ['profile_pic']
+
+
+class CreateSemanaForm(forms.ModelForm):
+
+    class Meta:
+        model = pag_model.Semana
+        fields = ['nombre', ]
+        widgets = {'nombre': forms.TextInput(
+            attrs={'class': 'form-control', 'type': 'text',
+                   'placeholder': 'Ingrese semana', 'form': 'formulario_categorias'}
+        )}

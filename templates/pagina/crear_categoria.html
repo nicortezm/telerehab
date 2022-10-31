@@ -7,6 +7,9 @@ Crear Categoria | {{user.first_name}} {{user.last_name}}
 {% endblock title %}
 
 {% block content %}
+
+
+
 <div class="px-3 py-1">
     <a href="/" class="text-uppercase text-dark" style="cursor: pointer;"><i class="fa-solid fa-angle-left"></i>
         Volver</a>
@@ -40,7 +43,8 @@ Crear Categoria | {{user.first_name}} {{user.last_name}}
                 <tr class="alert" role="alert">
                     <td scope="row">{{cat.id}}</td>
                     <td>{{cat.nombre}}</td>
-                    <td><button class="btn-grad-normal">Detalles</button></td>
+                    <td><button class="btn-grad-normal" data-toggle="tooltip" data-placement="top"
+                            title="{{cat.descripcion}}">Detalles</button></td>
                     <td> <button class="btn-grad-red border border-none"><i class="fa-solid fa-trash-can"></i></button>
                     </td>
                 </tr>

@@ -33,7 +33,11 @@ Dashboard | {{user.first_name}} {{user.last_name}}
             <td>+569{{p.telefono}}</td>
             <td>{{p.comuna}}</td>
             <td>{{p.cuidador}}</td>
-            <td><a href="{% url 'detalle-paciente' p.id %}" class="btn-grad-normal">Detalles</a></td>
+            <td>
+                {% if request.user.is_staff %}
+                {% else %}
+                <a href="{% url 'detalle-paciente' p.id %}" class="btn-grad-normal">Detalles</a></td>
+            {% endif %}
             <td> <a class="btn-grad-red border border-none"><i class="fa-solid fa-trash-can"></i></a> </td>
         </tr>
         {% endfor %}

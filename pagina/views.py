@@ -52,7 +52,6 @@ def perfil(request):
             user_dummy.save()
         if profile_form.is_valid():
             profile_form.save()
-            print("valido")
         return redirect(to='afterlogin')
     mydict = {'userForm': user_form, 'profileForm': profile_form}  #
     return render(request, 'core/perfil.html', context=mydict)
@@ -120,7 +119,7 @@ def kinesiologo_dashboard_view(request):
 
 
 @login_required(login_url='login')
-@user_passes_test(is_kinesiologo)
+@user_passes_test(is_admin_or_kinesiologo)
 def detalle_paciente_view(request, id):
     paciente = Paciente.objects.get(id=id)
     context = {
@@ -204,12 +203,22 @@ def crud_categoria_view(request):
 @login_required(login_url='login')
 @user_passes_test(is_kinesiologo)
 def crear_semana_view(request, id):
+    createSemanaForm = forms.CreateSemanaForm()
     paciente = Paciente.objects.get(id=id)
     ejercicios = Ejercicio.objects.all()
     context = {
         'paciente': paciente,
         'ejercicios': ejercicios,
+        'createSemanaForm': createSemanaForm
     }
+    if request.method == 'POST':
+        createSemanaForm = forms.CreateSemanaForm(request.POST)
+        if createSemanaForm.is_valid():
+            semana = createSemanaForm.save(commit=False)
+            semana.kinesiologo = Kinesiologo.objects.get(
+                user_id=request.user.id)
+            semana.paciente = Paciente.objects.get(id=id)
+            semana.save()
     return render(request, 'pagina/crear_semana.html', context=context)
 
 

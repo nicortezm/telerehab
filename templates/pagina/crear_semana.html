@@ -38,10 +38,13 @@ Crear Semana | {{user.first_name}} {{user.last_name}}
 
 
       <h5>Nombre Semana</h5>
-      <input form="formulario_categorias" class="form-control" type="text" placeholder="Ingrese semana" required> <br>
+      {% comment %} <input form="formulario_categorias" class="form-control" type="text" placeholder="Ingrese semana"
+        required> <br> {% endcomment %}
+      {{ createSemanaForm.nombre }}
       <button form="formulario_categorias" class="btn-grad-normal" type="submit">Crear Semana</button>
     </div>
-    <form id="formulario_categorias">
+    <form id="formulario_categorias" method="POST">
+      {% csrf_token %}
       <div class="col-8-sm">
         <div class="d-flex justify-content-center p-4 animate__animated animate__fadeInLeft">
 
