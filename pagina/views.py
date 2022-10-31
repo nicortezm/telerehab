@@ -36,22 +36,25 @@ def perfil(request):
         profile_form = forms.UpdateKinesiologoForm()
     else:
         profile_form = forms.UpdatePacienteForm()
+
     if request.method == 'POST':
         user_form = forms.UpdateUserForm(request.POST, instance=request.user)
         if is_kinesiologo(request.user):
             profile_form = forms.UpdateKinesiologoForm(
                 request.POST, request.FILES, instance=request.user.kinesiologo)
-        else:
+        elif is_paciente(request.user):
             profile_form = forms.UpdatePacienteForm(
                 request.POST, request.FILES, instance=request.user.paciente)
+
         if user_form.is_valid():
             user_form.save()
             user_dummy = User.objects.get(id=request.user.id)
             user_dummy.username = user_form.cleaned_data['email'].replace(
                 '@', '')
             user_dummy.save()
-        if profile_form.is_valid():
-            profile_form.save()
+        if is_admin_or_kinesiologo(request.user):
+            if profile_form.is_valid():
+                profile_form.save()
         return redirect(to='afterlogin')
     mydict = {'userForm': user_form, 'profileForm': profile_form}  #
     return render(request, 'core/perfil.html', context=mydict)

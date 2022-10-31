@@ -16,13 +16,13 @@ Crear Semana | {{user.first_name}} {{user.last_name}}
     </div>
   </div>
 
-  <div class="col-sm">
-    <div class="text-right ">
+  <div class="col-sm-3">
+    <div class="text-right">
       Nombre Paciente: {{paciente.get_name}}
       {% if paciente.profile_pic %}
-      <img class="img-thumbnail rounded m-3" src="{{paciente.profile_pic.url}}" width="50" alt="">
+      <img class="rounded m-3" src="{{paciente.profile_pic.url}}" width="50" alt="">
       {% else %}
-      <img class="img-thumbnail rounded m-3" src="{% static 'img/fotoPerfil.png' %}" width="50" alt="">
+      <img class="rounded m-3" src="{% static 'img/fotoPerfil.png' %}" width="50" alt="">
       {% endif %}
     </div>
 
@@ -30,17 +30,11 @@ Crear Semana | {{user.first_name}} {{user.last_name}}
 </div>
 <div class="container-fluid">
 
-
   <div class="row">
 
     <div class="col-4-sm ml-5 animate__animated animate__backInDown ">
-
-
-
       <h5>Nombre Semana</h5>
-      {% comment %} <input form="formulario_categorias" class="form-control" type="text" placeholder="Ingrese semana"
-        required> <br> {% endcomment %}
-      {{ createSemanaForm.nombre }}
+      {{createSemanaForm.nombre}} <br>
       <button form="formulario_categorias" class="btn-grad-normal" type="submit">Crear Semana</button>
     </div>
     <form id="formulario_categorias" method="POST">
@@ -51,9 +45,9 @@ Crear Semana | {{user.first_name}} {{user.last_name}}
           <div class="col px-4 py-1">
             <div class="accordion" id="accordion">
 
-              <div class="">
+              <div>
 
-                <div class="collapse show" id="headingOne">
+                <div id="headingOne">
                   <h3 class="mb-0">
                     <button id="activate" type="button" onclick="show(); blur();"
                       class="btn btn-link text-decoration-none " data-toggle="collapse" data-target="#collapseOne"
@@ -63,11 +57,16 @@ Crear Semana | {{user.first_name}} {{user.last_name}}
                   </h3>
                 </div>
 
-                <div id="collapseOne" class="collapse p-3" aria-labelledby="headingOne">
+                <div id="collapseOne" class="collapse show p-3" aria-labelledby="headingOne">
 
-                  <div class="d-flex justify-content-around">
-                    <input class="btn-grad-red" onclick="selects()" type="button" value="Añadir Todos" />
-                    <input class="btn-grad-normal" onclick="deSelect()" type="button" value="Quitar Todos" />
+                  <div class="d-flex flex-row">
+
+                    <div class="d-flex mr-3 justify-content-start">
+                      <input class="btn-grad-red" onclick="selects()" type="button" value="Añadir Todos" />
+                    </div>
+                    <div class="d-flex justify-content-end">
+                      <input class="btn-grad-normal" onclick="deSelect()" type="button" value="Quitar Todos" />
+                    </div>
                   </div>
 
                   <!-- AQUI EMPIEZA EL FOR -->
@@ -75,16 +74,19 @@ Crear Semana | {{user.first_name}} {{user.last_name}}
 
 
                   <div class="row d-flex p-2">
-                    <img class="p-3" src="{{ ejercicio.video_thumbnail.url }}" alt=""
+                    <img class="img-fluid p-3" src="{{ ejercicio.video_thumbnail.url }}" alt=""
                       style="width: 400px;height: auto; object-fit: cover;">
                     <div class="col-sm mt-3">
                       <h3>{{ ejercicio.nombre }}</h3>
-                      <h6>{{ ejercicio.detalle }}</h6>
+                      <h6 style="word-break: break-all; font-size: 14px;">{{ ejercicio.detalle }}</h6>
+                      <div class="form-check d-flex justify-content-lg-around justify-content-sm-start mb-3">
+                        <input class="form-check-input" type="checkbox"
+                          style="width: 22px; height: 22px; cursor: pointer;" value="" name="check">
+                      </div>
                     </div>
                   </div>
 
                   <div class="form-check d-flex justify-content-center mb-2">
-                    <input class="form-check-input" type="checkbox" value="" name="check">
                   </div>
                   {% endfor %}
                   <!-- Aqui termina el for -->
