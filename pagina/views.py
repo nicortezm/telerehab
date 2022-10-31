@@ -7,7 +7,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required, user_passes_test
 from users.views import is_paciente, is_kinesiologo, is_admin, is_admin_or_kinesiologo
 from users.models import Kinesiologo, Paciente, User
-from pagina.models import Categoria, Ejercicio
+from pagina.models import Categoria, Ejercicio, Semana
 # Create your views here.
 
 # VISTAS GENERICAS
@@ -31,11 +31,17 @@ def afterlogin_view(request):
 
 @login_required(login_url='login')
 def perfil(request):
+    typeuser = ''
     user_form = forms.UpdateUserForm(instance=request.user)
     if is_kinesiologo(request.user):
         profile_form = forms.UpdateKinesiologoForm()
+        typeuser = 'k'
+    elif is_paciente(request.user):
+        profile_form = forms.UpdatePacienteForm(instance=request.user.paciente)
+        typeuser = 'p'
     else:
-        profile_form = forms.UpdatePacienteForm()
+        profile_form = forms.UpdateUserForm()
+        typeuser = 'a'
 
     if request.method == 'POST':
         user_form = forms.UpdateUserForm(request.POST, instance=request.user)
@@ -52,11 +58,13 @@ def perfil(request):
             user_dummy.username = user_form.cleaned_data['email'].replace(
                 '@', '')
             user_dummy.save()
-        if is_admin_or_kinesiologo(request.user):
+        if typeuser in ('p', 'k'):
             if profile_form.is_valid():
                 profile_form.save()
+
         return redirect(to='afterlogin')
-    mydict = {'userForm': user_form, 'profileForm': profile_form}  #
+    mydict = {'userForm': user_form,
+              'profileForm': profile_form, 'typeuser': typeuser}  #
     return render(request, 'core/perfil.html', context=mydict)
 
 
@@ -125,8 +133,10 @@ def kinesiologo_dashboard_view(request):
 @user_passes_test(is_admin_or_kinesiologo)
 def detalle_paciente_view(request, id):
     paciente = Paciente.objects.get(id=id)
+    semana = Semana.objects.filter(paciente_id=id)
     context = {
-        'paciente': paciente
+        'paciente': paciente,
+        'semanas': semana,
     }
     return render(request, 'pagina/detalle_paciente.html', context=context)
 
@@ -222,6 +232,7 @@ def crear_semana_view(request, id):
                 user_id=request.user.id)
             semana.paciente = Paciente.objects.get(id=id)
             semana.save()
+            return HttpResponseRedirect(reverse('detalle-paciente', kwargs={'id': semana.paciente.id}))
     return render(request, 'pagina/crear_semana.html', context=context)
 
 

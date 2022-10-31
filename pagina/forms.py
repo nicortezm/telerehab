@@ -158,8 +158,8 @@ class UpdateKinesiologoForm(forms.ModelForm):
         attrs={'type': 'file', 'id': 'file_upload_id', 'style': 'display: none;',
                'accept': 'image/png, image/jpeg, image/JPG'}))
 
-    telefono = forms.CharField(required=False, widget=forms.TextInput(attrs={'type': 'file', 'id': 'file_upload_id', 'style': 'display: none;',
-                                                                             'accept': 'image/png, image/jpeg, image/JPG'}))
+    telefono = forms.CharField(
+        required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = models.Kinesiologo
@@ -170,10 +170,19 @@ class UpdatePacienteForm(forms.ModelForm):
     profile_pic = forms.ImageField(required=False, widget=forms.FileInput(
         attrs={'type': 'file', 'id': 'file_upload_id', 'style': 'display: none;',
                'accept': 'image/png, image/jpeg, image/JPG'}))
+    cuidador = forms.CharField(
+        required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    telefono = forms.CharField(
+        required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    description = forms.CharField(
+        required=False, widget=forms.Textarea(attrs={'class': 'form-control'}))
+    comuna = forms.CharField(
+        required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = models.Paciente
-        fields = ['profile_pic']
+        fields = ['profile_pic', 'cuidador',
+                  'telefono', 'description', 'comuna']
 
 
 class CreateSemanaForm(forms.ModelForm):

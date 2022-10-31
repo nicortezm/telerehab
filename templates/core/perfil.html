@@ -41,6 +41,46 @@ Mi Perfil | {{user.first_name}} {{user.last_name}}
                             {{userForm.email}}
                         </div>
                     </div>
+                    {% if typeuser == 'p' %}
+
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col flex-column d-flex">
+                            <label class="form-control-label"> <b>Nombre cuidador</b>
+                                <span class="text-danger"> *</span>
+                            </label>
+                            {{profileForm.cuidador}}
+                        </div>
+                    </div>
+
+
+
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col flex-column d-flex">
+                            <label class="form-control-label"> <b>{{profileForm.telefono.label}}</b>
+                                <span class="text-danger"> *</span>
+                            </label>
+                            {{profileForm.telefono}}
+                        </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col flex-column d-flex">
+                            <label class="form-control-label"> <b>{{profileForm.comuna.label}}</b>
+                                <span class="text-danger"> *</span>
+                            </label>
+                            {{profileForm.comuna}}
+                        </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col flex-column d-flex">
+                            <label class="form-control-label"> <b>Descripción</b>
+                                <span class="text-danger"> *</span>
+                            </label>
+                            {{profileForm.description}}
+                        </div>
+                    </div>
+
+
+                    {% endif %}
                     {% comment %}
                     <div class="row justify-content-between text-left">
                         <div class="form-group col flex-column d-flex">

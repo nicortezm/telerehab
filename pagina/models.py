@@ -26,6 +26,7 @@ class Semana(models.Model):
     kinesiologo = models.ForeignKey(
         Kinesiologo, on_delete=models.PROTECT, null=True)
     paciente = models.ForeignKey(Paciente, on_delete=models.PROTECT)
+    status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.nombre
@@ -64,7 +65,7 @@ class Ejercicio(models.Model):
         super().save(*args, **kwargs)
 
 
-class Actividad(models.Model):
+class Rutina(models.Model):
     ejercicio = models.ForeignKey(Ejercicio, on_delete=models.PROTECT)
 
     semana = models.ForeignKey(Semana, on_delete=models.CASCADE)
@@ -76,10 +77,10 @@ class Grabacion(models.Model):
     video = models.FileField(upload_to='videos/pomo', null=True,
                              validators=[FileExtensionValidator(allowed_extensions=['MOV', 'avi', 'mp4', 'webm', 'mkv'])])
     date_uploaded = models.DateTimeField(default=timezone.now)
-    actividad = models.ForeignKey(Actividad, on_delete=models.CASCADE)
+    rutina = models.ForeignKey(Rutina, on_delete=models.CASCADE)
 
 
 class Feedback(models.Model):
     nota = models.IntegerField()  # TODO: ADD CHOICES
     comentario = models.TextField()
-    actividad = models.ForeignKey(Actividad, on_delete=models.CASCADE)
+    rutina = models.ForeignKey(Rutina, on_delete=models.CASCADE)

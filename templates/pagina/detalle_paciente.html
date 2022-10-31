@@ -37,13 +37,14 @@ Detalle Paciente | {{paciente.get_name}}
         <div class="col border border-dark">
 
             <h5 class="text-center">EJERCICIOS</h5>
-
+            {% if semanas %}
+            {% for semana in semanas %}
             <div class="row mt-4">
 
                 <div class="col">
                     <h5 class="text-center">
                         <i style="color: #26C8DD" class="fa-solid fa-circle"></i>
-                        Semana 1
+                        {{semana.nombre}}
                     </h5>
                 </div>
 
@@ -52,66 +53,12 @@ Detalle Paciente | {{paciente.get_name}}
                     <i class="fa-solid fa-check ml-3 mt-1"></i>
                 </div>
             </div>
+            {% endfor %}
+            {% else %}
 
-            <div class="row mt-4">
+            <p>No hay semanas creadas</p>
 
-                <div class="col">
-                    <h5 class="text-center">
-                        <i style="color: #26C8DD" class="fa-solid fa-circle"></i>
-                        Semana 2
-                    </h5>
-                </div>
-
-                <div class="col d-flex justify-content-center">
-                    <button class="btn btn-secondary btn-sm" style="border-radius: 10px;">Ver Rutina</button>
-                    <i class="fa-solid fa-check ml-3 mt-1"></i>
-                </div>
-            </div>
-
-            <div class="row mt-4">
-
-                <div class="col">
-                    <h5 class="text-center">
-                        <i style="color: #26C8DD" class="fa-solid fa-circle"></i>
-                        Semana 3
-                    </h5>
-                </div>
-
-                <div class="col d-flex justify-content-center">
-                    <button class="btn btn-secondary btn-sm" style="border-radius: 10px;">Ver Rutina</button>
-                    <i class="fa-regular fa-clock ml-3 mt-1"></i>
-                </div>
-            </div>
-
-            <div class="row mt-4">
-
-                <div class="col">
-                    <h5 class="text-center">
-                        <i style="color: #26C8DD" class="fa-solid fa-circle"></i>
-                        Semana 4
-                    </h5>
-                </div>
-
-                <div class="col d-flex justify-content-center">
-                    <button class="btn btn-secondary btn-sm" style="border-radius: 10px;">Ver Rutina</button>
-                    <i class="fa-regular fa-clock ml-3 mt-1"></i>
-                </div>
-            </div>
-
-            <div class="row mt-4">
-
-                <div class="col">
-                    <h5 class="text-center">
-                        <i style="color: #26C8DD" class="fa-solid fa-circle"></i>
-                        Semana 5
-                    </h5>
-                </div>
-
-                <div class="col d-flex justify-content-center">
-                    <button class="btn btn-secondary btn-sm" style="border-radius: 10px;">Ver Rutina</button>
-                    <i class="fa-regular fa-clock ml-3 mt-1"></i>
-                </div>
-            </div>
+            {% endif %}
 
 
         </div>
