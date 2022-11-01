@@ -64,6 +64,10 @@ class Ejercicio(models.Model):
 
         super().save(*args, **kwargs)
 
+    @property
+    def get_category_name(self):
+        return self.categoria.nombre
+
 
 class Rutina(models.Model):
     ejercicio = models.ForeignKey(Ejercicio, on_delete=models.PROTECT)

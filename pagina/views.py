@@ -243,8 +243,10 @@ def crear_semana_view(request, id):
 def kinesiologo_mis_videos(request):
     ejercicios = Ejercicio.objects.filter(
         kinesiologo_id__user_id=request.user.id)
+    categorias = list(Categoria.objects.all().values_list('nombre', flat=True))
     context = {
-        'ejercicios': ejercicios
+        'ejercicios': ejercicios,
+        'categorias': categorias
     }
     return render(request, 'pagina/kinesiologo_lista_videos.html', context)
 

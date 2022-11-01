@@ -22,20 +22,34 @@ Mis videos | {{user.first_name}} {{user.last_name}}
       Volver</a>
   </div>
 
-  {% for ejercicio in ejercicios  %}
-
+  {% for cat in categorias %}
   <div class="gallery">
+
+    <h1>{{cat}}</h1>
+    {% for ejercicio in ejercicios  %}
+    {% if ejercicio.get_category_name == cat %}
     <video id="my-video" class="video-js" controls preload="none" poster="{{ejercicio.video_thumbnail.url}}"
       data-setup="()">
 
       <source src="{{ejercicio.video.url}}" type="video/mp4">
 
     </video>
-    <div class="desc">{{ejercicio.detalle}}</div>
+    <div>
+      <p class="text-center">{{ejercicio.detalle}}</p>
+    </div>
+    <div class="desc d-flex justify-content-start">
+
+      <button class="btn btn-danger btn-sm mr-2" style="border-radius: 12px;">Eliminar</button>
+      <button class="btn btn-secondary btn-sm mr-5" style="border-radius: 12px;">Editar</button>
+    </div>
+
+
+
+    <br>
+    {% endif %}
+
+    {% endfor %}
   </div>
-
-
-
-
   {% endfor %}
+
   {% endblock content %}
