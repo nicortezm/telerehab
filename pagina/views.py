@@ -7,7 +7,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required, user_passes_test
 from users.views import is_paciente, is_kinesiologo, is_admin, is_admin_or_kinesiologo
 from users.models import Kinesiologo, Paciente, User
-from pagina.models import Categoria, Ejercicio, Semana
+from pagina.models import Categoria, Ejercicio, Rutina, Semana
 # Create your views here.
 
 # VISTAS GENERICAS
@@ -259,3 +259,15 @@ def gestion_kinesiologos(request):
         'kinesiologos': kinesiologos
     }
     return render(request, 'pagina/gestion_kinesiologos.html', data)
+
+
+@login_required(login_url='login')
+@user_passes_test(is_kinesiologo)
+def kinesiologo_rutinas(request, id):
+    rutinas = Rutina.objects.filter(semana_id=id)
+    semana = Semana.objects.get(id=id)
+    data = {
+        'rutinas': rutinas,
+        'semana': semana
+    }
+    return render(request, 'pagina/kinesiologo_lista_rutinas.html', data)

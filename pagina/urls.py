@@ -34,5 +34,6 @@ urlpatterns = [
     path('mis-videos', views.kinesiologo_mis_videos, name='mis-videos'),
     path('gestion-kinesiologos', views.gestion_kinesiologos,
          name='gestion-kinesiologos'),
-
+    path('detalle_paciente/semana/<id>',
+         views.kinesiologo_rutinas, name="detalle-rutina"),
 ]
