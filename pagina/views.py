@@ -101,7 +101,9 @@ def paciente_signup_view(request):
 @login_required(login_url='login')
 @user_passes_test(is_paciente)
 def paciente_dashboard_view(request):
-    return render(request, 'pagina/paciente_dashboard.html')
+    semanas = Semana.objects.filter(paciente_id__user_id=request.user.id)
+    context = {'semanas': semanas}
+    return render(request, 'pagina/paciente_dashboard.html', context)
 
 
 # VISTAS KINESIOLOGO

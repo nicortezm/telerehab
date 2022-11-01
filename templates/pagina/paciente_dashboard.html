@@ -8,106 +8,53 @@ Paciente | {{user.first_name }}
 
 
 {% block content %}
-<br><br><br>
-<div class="d-flex justify-content-center p-4">
+<br><br>
+<div class="container-fluid">
 
-    <div class="row">
+    <div class="d-flex justify-content-center">
 
-        <div class="col border border-dark">
+        <div class="row p-2 shadow-sm">
+            <div class="col animate__animated animate__fadeInLeft">
 
-            <h5 class="text-center">EJERCICIOS</h5>
+                <h5 class="text-center">EJERCICIOS</h5>
 
-            <div class="row mt-4">
+                {% for semana in semanas %}
+                <div class="row mt-4">
+                    <div class="col">
+                        <h5 class="text-center">
+                            <i style="color: #26C8DD" class="fa-solid fa-circle"></i>
+                            Semana 1
+                        </h5>
+                    </div>
 
-                <div class="col">
-                    <h5 class="text-center">
-                        <i style="color: #26C8DD" class="fa-solid fa-circle"></i>
-                        Semana 1
-                    </h5>
+                    <div class="col d-flex justify-content-center">
+                        <button class="btn-grad-normal" style="border-radius: 10px;">Ver Rutina</button>
+                        {% if semana.status %}
+                        <i class="fa-solid fa-check ml-3 mt-1"></i>
+                        {% else %}
+                        <i class="fa-regular fa-clock ml-3 mt-1"></i>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+
+
+                <div class="row d-flex justify-content-center mt-4 mb-2">
+                    <button class="btn-grad-red">Iniciar Ejercicio de Hoy</button>
                 </div>
 
-                <div class="col d-flex justify-content-center">
-                    <button class="btn btn-secondary btn-sm" style="border-radius: 10px;">Ver Rutina</button>
-                    <i class="fa-solid fa-check ml-3 mt-1"></i>
+            </div>
+
+            <div class="col-sm mt-3 animate__animated animate__fadeInRight">
+                <h5 class="text-center">Avance Semanal</h5>
+                <div class="d-flex justify-content-center">
+                    <img class="img-fluid" width="450" src="{% static 'img/graficoP.png' %}" alt="Grafico semana">
                 </div>
             </div>
 
-            <div class="row mt-4">
-
-                <div class="col">
-                    <h5 class="text-center">
-                        <i style="color: #26C8DD" class="fa-solid fa-circle"></i>
-                        Semana 2
-                    </h5>
-                </div>
-
-                <div class="col d-flex justify-content-center">
-                    <button class="btn btn-secondary btn-sm" style="border-radius: 10px;">Ver Rutina</button>
-                    <i class="fa-solid fa-check ml-3 mt-1"></i>
-                </div>
-            </div>
-
-            <div class="row mt-4">
-
-                <div class="col">
-                    <h5 class="text-center">
-                        <i style="color: #26C8DD" class="fa-solid fa-circle"></i>
-                        Semana 3
-                    </h5>
-                </div>
-
-                <div class="col d-flex justify-content-center">
-                    <button class="btn btn-secondary btn-sm" style="border-radius: 10px;">Ver Rutina</button>
-                    <i class="fa-regular fa-clock ml-3 mt-1"></i>
-                </div>
-            </div>
-
-            <div class="row mt-4">
-
-                <div class="col">
-                    <h5 class="text-center">
-                        <i style="color: #26C8DD" class="fa-solid fa-circle"></i>
-                        Semana 4
-                    </h5>
-                </div>
-
-                <div class="col d-flex justify-content-center">
-                    <button class="btn btn-secondary btn-sm" style="border-radius: 10px;">Ver Rutina</button>
-                    <i class="fa-regular fa-clock ml-3 mt-1"></i>
-                </div>
-            </div>
-
-            <div class="row mt-4">
-
-                <div class="col">
-                    <h5 class="text-center">
-                        <i style="color: #26C8DD" class="fa-solid fa-circle"></i>
-                        Semana 5
-                    </h5>
-                </div>
-
-                <div class="col d-flex justify-content-center">
-                    <button class="btn btn-secondary btn-sm" style="border-radius: 10px;">Ver Rutina</button>
-                    <i class="fa-regular fa-clock ml-3 mt-1"></i>
-                </div>
-            </div>
-
-
-        </div>
-
-
-        <div class="col-sm">
-            <h5 class="text-center ">Avance Semanal</h5>
-            <img class="img-fluid" src="{% static 'img/graficoP.png' %}" alt="Grafico semana">
         </div>
 
     </div>
 
-</div>
-<div class="row">
-    <div class="col d-flex justify-content-end ">
-        <button class="btn btn-info rounded-pill">Iniciar ejercicio de hoy</button>
-    </div>
-    <div class="col"></div>
 </div>
 {% endblock content %}
