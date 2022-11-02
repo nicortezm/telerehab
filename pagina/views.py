@@ -286,7 +286,7 @@ def kinesiologo_mis_videos(request):
 
     categorias = set()
     for ejercicio in ejercicios:
-        categorias.add( ejercicio.categoria.nombre )
+        categorias.add(ejercicio.categoria.nombre)
 
     context = {
         'ejercicios': ejercicios,
@@ -310,8 +310,10 @@ def gestion_kinesiologos(request):
 def kinesiologo_rutinas(request, id):
     rutinas = Rutina.objects.filter(semana_id=id)
     semana = Semana.objects.get(id=id)
+    paciente = Paciente.objects.get(id=semana.paciente.id)
     data = {
         'rutinas': rutinas,
-        'semana': semana
+        'semana': semana,
+        'paciente': paciente
     }
     return render(request, 'pagina/kinesiologo_lista_rutinas.html', data)

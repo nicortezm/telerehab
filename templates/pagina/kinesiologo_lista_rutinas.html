@@ -10,16 +10,78 @@
 
 
 
-<div class="px-3 py-1">
-  <a href="/" class="text-uppercase text-dark" style="cursor: pointer;"><i class="fa-solid fa-angle-left"></i>
-    Volver</a>
+<div class="row">
+
+  <div class="col">
+    <div class="px-3 py-1">
+      <a class="text-uppercase text-dark text-decoration-none" href="{% url 'kinesiologo-dashboard'  %} "
+        style="cursor: pointer;"><i class="fa-solid fa-angle-left"></i> Volver</a>
+    </div>
+  </div>
+
+  <div class="col-sm">
+    <div class="text-right ">
+      Nombre Paciente: {{paciente.get_name}}
+      {% if paciente.profile_pic %}
+      <img class="img-thumbnail rounded m-3" src="{{paciente.profile_pic.url}}" width="50" alt="">
+      {% else %}
+      <img class="img-thumbnail rounded m-3" src="{% static 'img/fotoPerfil.png' %}" width="50" alt="">
+      {% endif %}
+    </div>
+
+  </div>
 </div>
 
-<div>
-  <p>{{semana.nombre}}</p>
+
+<div class="container w-75-sm d-flex animate__animated animate__fadeInLeft">
+  <div class="row justify-content-end">
+    <h5 class="h5-responsivee mt-3 mr-3"><ins>{{semana.nombre}}</ins></h5>
+  </div>
+  <div class="row justify-content-end">
+    <button button class="btn-grad-normal text-white mr-5">
+      Anadir Ejercicio
+    </button>
+  </div>
 </div>
 
 
+
+<div class="container w-75-sm p-3 mt-3 shadow-lg animate__animated animate__fadeInRight border border-dark">
+  <div class="row ml-3">
+    <div class="col">
+
+      <div class="row mt-4">
+        <div class="col d-flex justify-content-start">
+          <button class="mb-2 mr-2" style="background-color: white; border: none;">
+            <i class="fa-solid fa-bars fa-lg"></i>
+          </button>
+          <h5 class="text-center h5-responsivee">
+            <i style="color: #26C8DD" class="fa-solid fa-circle"></i>
+            Ejercicio 1
+          </h5>
+        </div>
+
+        <div class="col d-flex justify-content-end">
+          <button class="btn-grad-red border border-none">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+          <button class="btn-grad-normal ml-2 h5-responsivee">Detalles</button>
+        </div>
+      </div>
+
+
+
+
+
+
+
+    </div>
+  </div>
+</div>
+
+<div class="container d-flex justify-content-end animate__animated animate__fadeInLeft mt-4">
+  <button class="btn-grad-red text-white btn-md mr-4">Borrar Semana</button>
+</div>
 
 <h1></h1>
 {% endblock content %}
