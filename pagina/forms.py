@@ -7,7 +7,7 @@ from pagina import models as pag_model
 class UserForm(forms.ModelForm):
     class Meta:
         model = models.User
-        fields = ['first_name', 'last_name', 'email', 'password']
+        fields = ['first_name', 'email', 'password']
         widgets = {
             'password': forms.PasswordInput(
                 attrs={'class': 'form-control',

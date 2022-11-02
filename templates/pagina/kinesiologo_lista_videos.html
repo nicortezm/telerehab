@@ -35,12 +35,14 @@ Mis videos | {{user.first_name}} {{user.last_name}}
 
     </video>
     <div>
+      <h4>{{ejercicio.nombre}}</h4>
       <p class="text-center">{{ejercicio.detalle}}</p>
     </div>
     <div class="desc d-flex justify-content-start">
 
       <button class="btn btn-danger btn-sm mr-2" style="border-radius: 12px;">Eliminar</button>
-      <button class="btn btn-secondary btn-sm mr-5" style="border-radius: 12px;">Editar</button>
+      <a href="{% url 'modificar-ejercicio' ejercicio.id %}" class="btn btn-secondary btn-sm mr-5"
+        style="border-radius: 12px;">Editar</a>
     </div>
 
 

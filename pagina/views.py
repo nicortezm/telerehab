@@ -159,7 +159,22 @@ def crear_ejercicio_view(request):
     context = {"ejercicioForm": ejercicioForm}
     return render(request, 'pagina/crear_ejercicio.html', context=context)
 
-# VISTA ADMIN
+
+@login_required(login_url='login')
+@user_passes_test(is_kinesiologo)
+def modificar_ejercicio_view(request, id):
+    ejercicio = Ejercicio.objects.get(id=id)
+    ejercicioForm = forms.EjercicioForm(instance=ejercicio)
+    if request.method == 'POST':
+        ejercicioForm = forms.EjercicioForm(
+            request.POST, request.FILES, instance=ejercicio)
+        if ejercicioForm.is_valid():
+            ejercicio = ejercicioForm.save(commit=False)
+            ejercicio.save()
+        return HttpResponseRedirect(reverse('mis-videos'))
+    context = {"ejercicioForm": ejercicioForm,
+               "ejercicio": ejercicio}
+    return render(request, 'pagina/modificar_ejercicio.html', context=context)
 
 
 @login_required(login_url='login')
@@ -185,6 +200,30 @@ def crear_kinesiologo(request):
             my_kinesiologo_group[0].user_set.add(user)
         return HttpResponseRedirect(reverse('login'))
     return render(request, 'pagina/crear_kinesiologo.html', context=mydict)
+
+
+@login_required(login_url='login')
+@user_passes_test(is_admin)
+def modificar_kinesiologo(request, id):
+    kine = Kinesiologo.objects.get(id=id)
+    usuario = User.objects.get(id=kine.user.id)
+    userForm = forms.UpdateUserForm(instance=usuario)
+    kinesiologoForm = forms.KinesiologoForm(instance=kine)
+    mydict = {'userForm': userForm, 'kinesiologoForm': kinesiologoForm}
+    if request.method == 'POST':
+        userForm = forms.UpdateUserForm(
+            request.POST, instance=usuario)
+        kinesiologoForm = forms.KinesiologoForm(
+            request.POST, instance=kine)
+        if userForm.is_valid() and kinesiologoForm.is_valid():
+            user = userForm.save(commit=False)
+            # El username se genera a partir del email de registro
+            user.username = user.email.replace('@', '')
+            user.save()
+            kinesiologo = kinesiologoForm.save(commit=False)
+            kinesiologo.save()
+        return HttpResponseRedirect(reverse('gestion-kinesiologos'))
+    return render(request, 'pagina/modificar_kinesiologo.html', context=mydict)
 
 
 @login_required(login_url='login')

@@ -13,6 +13,8 @@ urlpatterns = [
          name='paciente-dashboard'),
     path('crear-kinesiologo', views.crear_kinesiologo,
          name='crear-kinesiologo'),
+    path('crear-kinesiologo/<id>', views.modificar_kinesiologo,
+         name='modificar-kinesiologo'),
     path('kinesiologo', views.kinesiologo_dashboard_view,
          name='kinesiologo-dashboard'),
     path('logout/', LogoutView.as_view(
@@ -36,4 +38,6 @@ urlpatterns = [
          name='gestion-kinesiologos'),
     path('detalle_paciente/semana/<id>',
          views.kinesiologo_rutinas, name="detalle-rutina"),
+    path('modificar-ejercicio/<id>', views.modificar_ejercicio_view,
+         name="modificar-ejercicio"),
 ]
