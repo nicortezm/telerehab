@@ -250,7 +250,7 @@ def crud_categoria_view(request):
         if categoriaForm.is_valid():
             categoria = categoriaForm.save(commit=False)
             categoria.save()
-        return HttpResponseRedirect(reverse('crear-categoria'))
+        return HttpResponseRedirect(reverse('categorias'))
     return render(request, 'pagina/crear_categoria.html', context=mydict)
 
 
@@ -282,7 +282,12 @@ def crear_semana_view(request, id):
 def kinesiologo_mis_videos(request):
     ejercicios = Ejercicio.objects.filter(
         kinesiologo_id__user_id=request.user.id)
-    categorias = list(Categoria.objects.all().values_list('nombre', flat=True))
+    # categorias = list(Categoria.objects.all().values_list('nombre', flat=True))
+
+    categorias = set()
+    for ejercicio in ejercicios:
+        categorias.add( ejercicio.categoria.nombre )
+
     context = {
         'ejercicios': ejercicios,
         'categorias': categorias
