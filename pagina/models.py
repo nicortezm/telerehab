@@ -73,7 +73,7 @@ class Rutina(models.Model):
     ejercicio = models.ForeignKey(Ejercicio, on_delete=models.PROTECT)
 
     semana = models.ForeignKey(Semana, on_delete=models.CASCADE)
-    completado = models.BooleanField()
+    completado = models.BooleanField(default=False)
 
 
 class Grabacion(models.Model):
@@ -82,6 +82,27 @@ class Grabacion(models.Model):
                              validators=[FileExtensionValidator(allowed_extensions=['MOV', 'avi', 'mp4', 'webm', 'mkv'])])
     date_uploaded = models.DateTimeField(default=timezone.now)
     rutina = models.ForeignKey(Rutina, on_delete=models.CASCADE)
+
+    def _set_thumbnail_source_image(self):
+        # crear un thumbnail basado en el video
+        image_path = os.path.splitext(self.video.path)[
+            0] + '_thumbnail_src_image.jpg'
+        # se puede reemplazar 0 con otro valor para las miniaturas
+        save_frame_from_video(self.video.path, 0, image_path)
+
+        # generar un path relativo a donde está el video
+        media_image_path = os.path.relpath(image_path, settings.MEDIA_ROOT)
+
+        self.video_thumbnail = media_image_path
+
+    def save(self, *args, **kwargs):
+        # si es que no hay miniatura asignada
+        if not bool(self.video_thumbnail):
+            # Tenemos que guardarlo primero, para que django genere el path para el video y luego ocuparlo para la minaturaf
+            super().save(*args, **kwargs)
+            self._set_thumbnail_source_image()
+
+        super().save(*args, **kwargs)
 
 
 class Feedback(models.Model):

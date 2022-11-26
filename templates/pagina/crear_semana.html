@@ -81,7 +81,8 @@ Crear Semana | {{user.first_name}} {{user.last_name}}
                       <h6 style="word-break: break-all; font-size: 14px;">{{ ejercicio.detalle }}</h6>
                       <div class="form-check d-flex justify-content-lg-around justify-content-sm-start mb-3">
                         <input class="form-check-input" type="checkbox"
-                          style="width: 22px; height: 22px; cursor: pointer;" value="" name="check">
+                          style="width: 22px; height: 22px; cursor: pointer;" value="{{ ejercicio.id }}"
+                          name="checkEjercicio">
                       </div>
                     </div>
                   </div>

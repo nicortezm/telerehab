@@ -268,11 +268,19 @@ def crear_semana_view(request, id):
     if request.method == 'POST':
         createSemanaForm = forms.CreateSemanaForm(request.POST)
         if createSemanaForm.is_valid():
+            ejercicios = request.POST.getlist("checkEjercicio")
             semana = createSemanaForm.save(commit=False)
             semana.kinesiologo = Kinesiologo.objects.get(
                 user_id=request.user.id)
             semana.paciente = Paciente.objects.get(id=id)
             semana.save()
+
+            # Crear rutinas de semana
+            for ejercicio in ejercicios:
+                ejercicio_obj = Ejercicio.objects.get(id=ejercicio)
+                rutina = Rutina.objects.create(
+                    ejercicio=ejercicio_obj, semana=semana)
+                rutina.save()
             return HttpResponseRedirect(reverse('detalle-paciente', kwargs={'id': semana.paciente.id}))
     return render(request, 'pagina/crear_semana.html', context=context)
 
@@ -309,7 +317,9 @@ def gestion_kinesiologos(request):
 @user_passes_test(is_kinesiologo)
 def kinesiologo_rutinas(request, id):
     rutinas = Rutina.objects.filter(semana_id=id)
+
     semana = Semana.objects.get(id=id)
+    print(rutinas)
     paciente = Paciente.objects.get(id=semana.paciente.id)
     data = {
         'rutinas': rutinas,

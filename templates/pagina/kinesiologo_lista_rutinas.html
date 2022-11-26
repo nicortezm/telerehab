@@ -50,6 +50,9 @@
   <div class="row ml-3">
     <div class="col">
 
+
+      {% for rutina in rutinas %}
+
       <div class="row mt-4">
         <div class="col d-flex justify-content-start">
           <button class="mb-2 mr-2" style="background-color: white; border: none;">
@@ -57,7 +60,7 @@
           </button>
           <h5 class="text-center h5-responsivee">
             <i style="color: #26C8DD" class="fa-solid fa-circle"></i>
-            Ejercicio 1
+            {{rutina.ejercicio.nombre}}
           </h5>
         </div>
 
@@ -65,9 +68,12 @@
           <button class="btn-grad-red border border-none">
             <i class="fa-solid fa-trash-can"></i>
           </button>
-          <button class="btn-grad-normal ml-2 h5-responsivee">Detalles</button>
+          <a href="{% url 'modificar-ejercicio' rutina.ejercicio.id %}"
+            class="btn-grad-normal ml-2 h5-responsivee">Detalles</a>
         </div>
       </div>
+
+      {% endfor %}
 
 
 
