@@ -77,11 +77,11 @@ class Rutina(models.Model):
 
 
 class Grabacion(models.Model):
-    nombre = models.CharField("Nombre categoria", max_length=50, unique=True)
     video = models.FileField(upload_to='videos/pomo', null=True,
                              validators=[FileExtensionValidator(allowed_extensions=['MOV', 'avi', 'mp4', 'webm', 'mkv'])])
-    date_uploaded = models.DateTimeField(default=timezone.now)
-    rutina = models.ForeignKey(Rutina, on_delete=models.CASCADE)
+    date_uploaded = models.DateTimeField(default=timezone.now, null=True)
+    rutina = models.ForeignKey(Rutina, on_delete=models.CASCADE, null=True)
+    video_thumbnail = models.ImageField(null=True)
 
     def _set_thumbnail_source_image(self):
         # crear un thumbnail basado en el video

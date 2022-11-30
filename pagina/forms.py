@@ -194,3 +194,15 @@ class CreateSemanaForm(forms.ModelForm):
             attrs={'class': 'form-control', 'type': 'text',
                    'placeholder': 'Ingrese semana', 'form': 'formulario_categorias'}
         )}
+
+
+class CreateGrabacionForm(forms.ModelForm):
+    class Meta:
+        model = pag_model.Grabacion
+        fields = ['video']
+        widgets = {
+            'video': forms.FileInput(
+                attrs={'type': 'file', 'id': 'file_upload_id', 'style': 'display: none;',
+                       'accept': 'video/mp4,video/x-m4v,video/*'}
+            )
+        }

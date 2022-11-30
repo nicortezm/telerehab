@@ -332,14 +332,22 @@ def kinesiologo_rutinas(request, id):
 @login_required(login_url='login')
 @user_passes_test(is_paciente)
 def paciente_ejercicio(request, id):
+    grabacionForm = forms.CreateGrabacionForm()
     rutina = Rutina.objects.get(id=id)
     ejercicio = Ejercicio.objects.get(id=rutina.ejercicio.id)
     semana = Semana.objects.get(id=rutina.semana.id)
     context = {
         "rutina": rutina,
         "ejercicio": ejercicio,
-        "semana": semana
+        "semana": semana,
+        "grabacionForm": grabacionForm
     }
+    if request.method == 'POST':
+        grabacionForm = forms.CreateGrabacionForm(request.POST, request.FILES)
+        if grabacionForm.is_valid():
+            grabacion = grabacionForm.save(commit=False)
+            grabacion.rutina = rutina
+
     return render(request, 'pagina/paciente_ejercicio.html', context=context)
 
 

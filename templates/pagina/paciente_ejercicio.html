@@ -42,24 +42,29 @@
 
     <!-- VIDEO PACIENTE -->
     <div class="col-lg-6 col-sm-12">
+      <form class="w-100" method="POST" autocomplete="off" enctype="multipart/form-data">
+        {% csrf_token %}
+        <img style="object-fit: contain; cursor: pointer;" width="80%" height="height" onclick="_upload()"
+          class="img-fluid border fotito border-dark" src=" {% static '/img/adjuntaEjercicio.png' %} " alt="foto">
+        {{grabacionForm.video}}
 
-      <img style="object-fit: contain; cursor: pointer;" width="80%" height="height" onclick="_upload()"
-        class="img-fluid border fotito border-dark" src=" {% static '/img/adjuntaEjercicio.png' %} " alt="foto">
-      <input type='file' id='file_upload_id' style="display:none;" accept="video/mp4,video/x-m4v,video/*" />
 
-      <video class="video_paciente" width="80%" height="auto" style="display:none;" controls autoplay>
-        Your browser does not support the video tag.
-      </video>
+        <video class="video_paciente" width="80%" height="auto" style="display:none;" controls>
+          Your browser does not support the video tag.
+        </video>
 
-      <div class="col d-flex justify-content-center mt-1">
-        <button class="btn btn-warning rounded-start mr-2" data-toggle="tooltip" data-placement="bottom"
-          title="¿Sientes molestias?">
-          <i class="fa-sharp fa-solid fa-circle-exclamation" style="font-size: 40px;"></i>
-        </button>
-        <button class="btn btn-info ml-3 rounded-start" data-toggle="tooltip" data-placement="bottom" title="Siguiente">
-          <i class="fas fa-angle-right" style="font-size: 40px;"></i>
-        </button>
-      </div>
+        <div class="col d-flex justify-content-center mt-1 align-items-center ">
+          <a onclick="_upload()" class="botoncito btn btn-danger" style="display:none">
+            <i class="fas fa-edit" style="font-size: 40px;"></i>
+          </a>
+
+
+          <button type="submit" class="btn btn-info ml-3 rounded-start" data-toggle="tooltip" data-placement="bottom"
+            title="Siguiente">
+            <i class="fas fa-angle-right" style="font-size: 40px;"></i>
+          </button>
+        </div>
+      </form>
     </div>
 
 
@@ -96,6 +101,7 @@
     document.querySelector(".video_paciente").style.display = 'block';
     document.querySelector(".video_paciente").src = blobURL;
     document.querySelector(".fotito").style.display = 'none';
+    document.querySelector(".botoncito").style.display = 'block';
   }
 </script>
 {% endblock content %}
