@@ -1,6 +1,3 @@
-from email.policy import default
-from operator import truediv
-from pickle import TRUE
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 

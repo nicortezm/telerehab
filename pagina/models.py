@@ -70,7 +70,7 @@ class Ejercicio(models.Model):
 
 
 class Rutina(models.Model):
-    ejercicio = models.ForeignKey(Ejercicio, on_delete=models.PROTECT)
+    ejercicio = models.ForeignKey(Ejercicio, on_delete=models.CASCADE)
 
     semana = models.ForeignKey(Semana, on_delete=models.CASCADE)
     completado = models.BooleanField(default=False)

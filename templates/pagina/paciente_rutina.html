@@ -1,0 +1,64 @@
+{% extends "core/navbar.html" %}
+
+{% load static %}
+
+{% block title %}
+{{semana.nombre}} | {{user.first_name}} {{user.last_name}}
+{% endblock title %}
+
+{% block content %}
+
+
+
+<div class="row">
+
+  <div class="col">
+    <div class="px-3 py-1">
+      <a class="text-uppercase text-dark text-decoration-none" href="/" style="cursor: pointer;"><i
+          class="fa-solid fa-angle-left"></i> Volver</a>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="container w-75-sm p-3 mt-3 shadow-lg animate__animated animate__fadeInRight border border-dark">
+  <div class="row ml-3">
+    <div class="col">
+
+
+      {% for rutina in rutinas %}
+
+      <div class="row mt-4">
+        <div class="col d-flex justify-content-start">
+          <button class="mb-2 mr-2" style="background-color: white; border: none;">
+            <i class="fa-solid fa-bars fa-lg"></i>
+          </button>
+          <h5 class="text-center h5-responsivee">
+            <i style="color: #26C8DD" class="fa-solid fa-circle"></i>
+            {{rutina.ejercicio.nombre}}
+          </h5>
+        </div>
+
+        <div class="col d-flex justify-content-end">
+          <a href="{% url 'paciente-ejercicio' rutina.id %}" class="btn-grad-normal ml-2 h5-responsivee">Detalles</a>
+        </div>
+      </div>
+
+      {% endfor %}
+
+
+
+
+
+
+
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}

@@ -327,3 +327,29 @@ def kinesiologo_rutinas(request, id):
         'paciente': paciente
     }
     return render(request, 'pagina/kinesiologo_lista_rutinas.html', data)
+
+
+@login_required(login_url='login')
+@user_passes_test(is_paciente)
+def paciente_ejercicio(request, id):
+    rutina = Rutina.objects.get(id=id)
+    ejercicio = Ejercicio.objects.get(id=rutina.ejercicio.id)
+    semana = Semana.objects.get(id=rutina.semana.id)
+    context = {
+        "rutina": rutina,
+        "ejercicio": ejercicio,
+        "semana": semana
+    }
+    return render(request, 'pagina/paciente_ejercicio.html', context=context)
+
+
+@login_required(login_url='login')
+@user_passes_test(is_paciente)
+def paciente_rutina(request, id):
+    rutinas = Rutina.objects.filter(semana_id=id)
+    semana = Semana.objects.get(id=id)
+    data = {
+        'rutinas': rutinas,
+        'semana': semana
+    }
+    return render(request, 'pagina/paciente_rutina.html', data)

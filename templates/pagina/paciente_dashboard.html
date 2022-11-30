@@ -23,12 +23,13 @@ Paciente | {{user.first_name }}
                     <div class="col">
                         <h5 class="text-center">
                             <i style="color: #26C8DD" class="fa-solid fa-circle"></i>
-                            Semana 1
+                            {{semana.nombre}}
                         </h5>
                     </div>
 
                     <div class="col d-flex justify-content-center">
-                        <button class="btn-grad-normal" style="border-radius: 10px;">Ver Rutina</button>
+                        <a href="{% url 'paciente-rutina' semana.id %}" class="btn-grad-normal"
+                            style="border-radius: 10px;">Ver Rutina</a>
                         {% if semana.status %}
                         <i class="fa-solid fa-check ml-3 mt-1"></i>
                         {% else %}
@@ -40,7 +41,7 @@ Paciente | {{user.first_name }}
 
 
                 <div class="row d-flex justify-content-center mt-4 mb-2">
-                    <button class="btn-grad-red">Iniciar Ejercicio de Hoy</button>
+                    {% comment %} <button class="btn-grad-red">Iniciar Ejercicio de Hoy</button> {% endcomment %}
                 </div>
 
             </div>

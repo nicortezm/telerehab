@@ -40,4 +40,6 @@ urlpatterns = [
          views.kinesiologo_rutinas, name="detalle-rutina"),
     path('modificar-ejercicio/<id>', views.modificar_ejercicio_view,
          name="modificar-ejercicio"),
+    path('ejercicios/<id>', views.paciente_ejercicio, name="paciente-ejercicio"),
+    path('semana/<id>', views.paciente_rutina, name="paciente-rutina")
 ]
