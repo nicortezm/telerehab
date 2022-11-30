@@ -41,5 +41,8 @@ urlpatterns = [
     path('modificar-ejercicio/<id>', views.modificar_ejercicio_view,
          name="modificar-ejercicio"),
     path('ejercicios/<id>', views.paciente_ejercicio, name="paciente-ejercicio"),
-    path('semana/<id>', views.paciente_rutina, name="paciente-rutina")
+    path('semana/<id>', views.paciente_rutina, name="paciente-rutina"),
+    path('comentarios/<id>', views.paciente_comentarios,
+         name="paciente-comentarios"),
+
 ]

@@ -106,6 +106,11 @@ class Grabacion(models.Model):
 
 
 class Feedback(models.Model):
-    nota = models.IntegerField()  # TODO: ADD CHOICES
+    # nota = models.IntegerField()  # TODO: ADD CHOICES
     comentario = models.TextField()
-    rutina = models.ForeignKey(Rutina, on_delete=models.CASCADE)
+    rutina = models.ForeignKey(Rutina, on_delete=models.CASCADE, null=True)
+
+
+class Comentario(models.Model):
+    rutina = models.ForeignKey(Rutina, on_delete=models.CASCADE, null=True)
+    comentario = models.TextField()

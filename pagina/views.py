@@ -347,6 +347,8 @@ def paciente_ejercicio(request, id):
         if grabacionForm.is_valid():
             grabacion = grabacionForm.save(commit=False)
             grabacion.rutina = rutina
+            # grabacion.save()
+            return HttpResponseRedirect(reverse('paciente-comentarios', kwargs={'id': rutina.id}))
 
     return render(request, 'pagina/paciente_ejercicio.html', context=context)
 
@@ -361,3 +363,25 @@ def paciente_rutina(request, id):
         'semana': semana
     }
     return render(request, 'pagina/paciente_rutina.html', data)
+
+
+@login_required(login_url='login')
+@user_passes_test(is_paciente)
+def paciente_comentarios(request, id):
+    rutina = Rutina.objects.get(id=id)
+    ejercicio = rutina.ejercicio
+    comentario = forms.ComentarioPacienteForm()
+    # ejercicio = rutina.ejercicio
+    data = {
+        "ejercicio": ejercicio,
+        "comentarioForm": comentario
+    }
+    if request.method == 'POST':
+        comentario = forms.ComentarioPacienteForm(request.POST)
+        if comentario.is_valid():
+            comentario.save(commit=False)
+            comentario.rutina = rutina
+            comentario.save()
+            # esta debe ir abajo en comentarios
+            # return HttpResponseRedirect(reverse('paciente-rutina', kwargs={'id': rutina.semana.id}))
+    return render(request, 'pagina/paciente_comentarios.html', data)

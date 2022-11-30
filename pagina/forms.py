@@ -206,3 +206,15 @@ class CreateGrabacionForm(forms.ModelForm):
                        'accept': 'video/mp4,video/x-m4v,video/*'}
             )
         }
+
+
+class ComentarioPacienteForm(forms.ModelForm):
+    class Meta:
+        model = pag_model.Comentario
+        fields = ['comentario']
+        widgets = {
+            'comentario': forms.Textarea(
+                attrs={'class': 'form-control',
+                       'style': 'resize:none;', 'cols': '5', 'rows': '6'})
+
+        }
