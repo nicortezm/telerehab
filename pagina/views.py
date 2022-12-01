@@ -7,7 +7,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required, user_passes_test
 from users.views import is_paciente, is_kinesiologo, is_admin, is_admin_or_kinesiologo
 from users.models import Kinesiologo, Paciente, User
-from pagina.models import Categoria, Ejercicio, Rutina, Semana
+from pagina.models import Categoria, Ejercicio, Rutina, Semana, Comentario
 # Create your views here.
 
 # VISTAS GENERICAS
@@ -347,7 +347,7 @@ def paciente_ejercicio(request, id):
         if grabacionForm.is_valid():
             grabacion = grabacionForm.save(commit=False)
             grabacion.rutina = rutina
-            # grabacion.save()
+            grabacion.save()
             return HttpResponseRedirect(reverse('paciente-comentarios', kwargs={'id': rutina.id}))
 
     return render(request, 'pagina/paciente_ejercicio.html', context=context)
@@ -370,18 +370,20 @@ def paciente_rutina(request, id):
 def paciente_comentarios(request, id):
     rutina = Rutina.objects.get(id=id)
     ejercicio = rutina.ejercicio
-    comentario = forms.ComentarioPacienteForm()
+    comentarioForm = forms.ComentarioPacienteForm()
     # ejercicio = rutina.ejercicio
     data = {
         "ejercicio": ejercicio,
-        "comentarioForm": comentario
+        "comentarioForm": comentarioForm,
+        "rutina": rutina
     }
     if request.method == 'POST':
-        comentario = forms.ComentarioPacienteForm(request.POST)
-        if comentario.is_valid():
-            comentario.save(commit=False)
+        comentarioForm = forms.ComentarioPacienteForm(request.POST)
+        if comentarioForm.is_valid():
+            comentario = comentarioForm.save(commit=False)
             comentario.rutina = rutina
             comentario.save()
-            # esta debe ir abajo en comentarios
+            rutina.completado = True
+            rutina.save()
             # return HttpResponseRedirect(reverse('paciente-rutina', kwargs={'id': rutina.semana.id}))
     return render(request, 'pagina/paciente_comentarios.html', data)

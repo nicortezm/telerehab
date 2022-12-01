@@ -211,9 +211,9 @@ class CreateGrabacionForm(forms.ModelForm):
 class ComentarioPacienteForm(forms.ModelForm):
     class Meta:
         model = pag_model.Comentario
-        fields = ['comentario']
+        fields = ['texto']
         widgets = {
-            'comentario': forms.Textarea(
+            'texto': forms.Textarea(
                 attrs={'class': 'form-control',
                        'style': 'resize:none;', 'cols': '5', 'rows': '6'})
 
