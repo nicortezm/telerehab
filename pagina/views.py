@@ -387,3 +387,29 @@ def paciente_comentarios(request, id):
             rutina.save()
             # return HttpResponseRedirect(reverse('paciente-rutina', kwargs={'id': rutina.semana.id}))
     return render(request, 'pagina/paciente_comentarios.html', data)
+
+
+@login_required(login_url='login')
+@user_passes_test(is_admin_or_kinesiologo)
+def eliminar_semana(request, id):
+    semana = Semana.objects.get(id=id)
+    paciente = semana.paciente
+    semana.delete()
+    return HttpResponseRedirect(reverse('detalle-paciente', kwargs={'id': paciente.id}))
+
+
+@login_required(login_url='login')
+@user_passes_test(is_admin)
+def eliminar_categoria(request, id):
+    categoria = Categoria.objects.get(id=id)
+    categoria.delete()
+    return HttpResponseRedirect(reverse('categorias'))
+
+
+@login_required(login_url='login')
+@user_passes_test(is_kinesiologo)
+def eliminar_rutina(request, id):
+    rutina = Rutina.objects.get(id=id)
+    semana = rutina.semana
+    rutina.delete()
+    return HttpResponseRedirect(reverse('detalle-rutina', kwargs={'id': semana.id}))

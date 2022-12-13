@@ -65,9 +65,9 @@
         </div>
 
         <div class="col d-flex justify-content-end">
-          <button class="btn-grad-red border border-none">
+          <a href="{% url 'eliminar-rutina' rutina.id %}" class="btn-grad-red border border-none">
             <i class="fa-solid fa-trash-can"></i>
-          </button>
+          </a>
           <a href="{% url 'modificar-ejercicio' rutina.ejercicio.id %}"
             class="btn-grad-normal ml-2 h5-responsivee">Detalles</a>
         </div>
@@ -86,7 +86,8 @@
 </div>
 
 <div class="container d-flex justify-content-end animate__animated animate__fadeInLeft mt-4">
-  <button class="btn-grad-red text-white btn-md mr-4">Borrar Semana</button>
+  <a href="{% url 'eliminar-semana' semana.id %}" class="btn-grad-red text-white btn-md mr-4">Borrar
+    Semana</a>
 </div>
 
 <h1></h1>

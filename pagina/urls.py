@@ -44,5 +44,8 @@ urlpatterns = [
     path('semana/<id>', views.paciente_rutina, name="paciente-rutina"),
     path('comentarios/<id>', views.paciente_comentarios,
          name="paciente-comentarios"),
-
+    path('eliminar_semana/<id>', views.eliminar_semana, name="eliminar-semana"),
+    path('eliminar_categoria/<id>', views.eliminar_categoria,
+         name="eliminar-categoria"),
+    path('eliminar_rutina/<id>', views.eliminar_rutina, name="eliminar-rutina"),
 ]
