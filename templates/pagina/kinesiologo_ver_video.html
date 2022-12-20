@@ -1,0 +1,98 @@
+{% extends "core/navbar.html" %}
+
+{% load static %}
+
+{% block title %}
+{{ejercicio.nombre}} | {{user.first_name}} {{user.last_name}}
+{% endblock title %}
+
+
+{% block content %}
+<div class="px-3 py-1">
+  <a href="/" class="text-uppercase text-dark" style="cursor: pointer;"><i class="fa-solid fa-angle-left"></i>
+    Volver</a>
+</div>
+<div class="">
+  <div class="text-center mb-5 ">
+    <h4>{{semana.nombre}}: {{ejercicio.nombre}}</h4>
+  </div>
+
+</div>
+
+<div class="text-center">
+  <!-- ------------------------------------- SECCION VIDEOS------------------- -->
+  <div class="row animate__animated animate__fadeInRight">
+
+    <!-- VIDEO KINE -->
+    <div class="col-lg-6 col-sm-12 mb-5 ">
+      <video width="80%" height="auto" id="my-video" class="video-js" controls preload="none"
+        poster="{{ejercicio.video_thumbnail.url}}" data-setup="()">
+
+        <source src="{{ejercicio.video.url}}" type="video/mp4">
+
+      </video>
+      <div class="col d-flex justify-content-center">
+        <button onclick="myFunction()" class="btn-grad-moon">Ver Detalles</button>
+      </div>
+      <div id="myDIV" style="display: none;">
+        {{ejercicio.detalle}}
+      </div>
+
+    </div>
+
+    <!-- VIDEO Paciente -->
+    <div class="col-lg-6 col-sm-12 mb-5 ">
+      <video width="80%" height="auto" id="my-video" class="video-js" controls preload="none"
+        poster="{{grabacion.video_thumbnail.url}}" data-setup="()">
+
+        <source src="{{grabacion.video.url}}" type="video/mp4">
+
+      </video>
+      <div class="col d-flex justify-content-center">
+        <a href="{% url 'kinesiologo-feedback' rutina.id %}" class="btn btn-info ml-3 rounded-start"
+          data-toggle="tooltip" data-placement="bottom" title="Siguiente">
+          <i class="fas fa-angle-right" style="font-size: 40px;"></i>
+        </a>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+</div>
+<!-- FUNCION  PARA QUE AL TOCAR LA IMG SE HABRA EL INPUT FILE -->
+<script>
+  function _upload() {
+    document.getElementById('file_upload_id').click();
+  }
+</script>
+<style>
+  .row {
+    margin: 0;
+  }
+</style>
+<script>
+  function myFunction() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+</script>
+
+
+<script>
+  document.getElementById("file_upload_id").onchange = function (event) {
+    let file = event.target.files[0];
+    let blobURL = URL.createObjectURL(file);
+    document.querySelector(".video_paciente").style.display = 'block';
+    document.querySelector(".video_paciente").src = blobURL;
+    document.querySelector(".fotito").style.display = 'none';
+    document.querySelector(".botoncito").style.display = 'block';
+  }
+</script>
+{% endblock content %}

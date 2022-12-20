@@ -48,4 +48,11 @@ urlpatterns = [
     path('eliminar_categoria/<id>', views.eliminar_categoria,
          name="eliminar-categoria"),
     path('eliminar_rutina/<id>', views.eliminar_rutina, name="eliminar-rutina"),
+    path('eliminar_ejercicio/<id>', views.eliminar_ejercicio,
+         name="eliminar-ejercicio"),
+    path('feedback/<id>', views.kinesiologo_feedback,
+         name="kinesiologo-feedback"),
+    path('ver_ejercicios/<id>', views.kinesiologo_ver_ejercicio,
+         name="kinesiologo-ejercicio"),
+
 ]

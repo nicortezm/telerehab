@@ -65,11 +65,15 @@
         </div>
 
         <div class="col d-flex justify-content-end">
+
+          {% if rutina.completado %}
+          <a href="{% url 'kinesiologo-ejercicio' rutina.id %}" class="btn-grad-blue-2 ml-2 h5-responsivee">Detalles</a>
+          {% endif %}
+          <a href="{% url 'modificar-ejercicio' rutina.ejercicio.id %}" class="btn-grad-normal mx-2 h5-responsivee"><i
+              class="fa-regular fa-pen-to-square"></i></a>
           <a href="{% url 'eliminar-rutina' rutina.id %}" class="btn-grad-red border border-none">
             <i class="fa-solid fa-trash-can"></i>
           </a>
-          <a href="{% url 'modificar-ejercicio' rutina.ejercicio.id %}"
-            class="btn-grad-normal ml-2 h5-responsivee">Detalles</a>
         </div>
       </div>
 

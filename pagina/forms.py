@@ -218,3 +218,15 @@ class ComentarioPacienteForm(forms.ModelForm):
                        'style': 'resize:none;', 'cols': '5', 'rows': '6'})
 
         }
+
+
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model = pag_model.Feedback
+        fields = ['comentario']
+        widgets = {
+            'comentario': forms.Textarea(
+                attrs={'class': 'form-control',
+                       'style': 'resize:none;', 'cols': '5', 'rows': '6'})
+
+        }

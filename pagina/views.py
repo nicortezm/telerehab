@@ -7,7 +7,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required, user_passes_test
 from users.views import is_paciente, is_kinesiologo, is_admin, is_admin_or_kinesiologo
 from users.models import Kinesiologo, Paciente, User
-from pagina.models import Categoria, Ejercicio, Rutina, Semana, Comentario
+from pagina.models import Categoria, Ejercicio, Grabacion, Rutina, Semana, Comentario
 # Create your views here.
 
 # VISTAS GENERICAS
@@ -319,7 +319,6 @@ def kinesiologo_rutinas(request, id):
     rutinas = Rutina.objects.filter(semana_id=id)
 
     semana = Semana.objects.get(id=id)
-    print(rutinas)
     paciente = Paciente.objects.get(id=semana.paciente.id)
     data = {
         'rutinas': rutinas,
@@ -385,7 +384,7 @@ def paciente_comentarios(request, id):
             comentario.save()
             rutina.completado = True
             rutina.save()
-            # return HttpResponseRedirect(reverse('paciente-rutina', kwargs={'id': rutina.semana.id}))
+            return HttpResponseRedirect(reverse('paciente-dashboard'))
     return render(request, 'pagina/paciente_comentarios.html', data)
 
 
@@ -413,3 +412,51 @@ def eliminar_rutina(request, id):
     semana = rutina.semana
     rutina.delete()
     return HttpResponseRedirect(reverse('detalle-rutina', kwargs={'id': semana.id}))
+
+
+@login_required(login_url='login')
+@user_passes_test(is_kinesiologo)
+def eliminar_ejercicio(request, id):
+    ejercicio = Ejercicio.objects.get(id=id)
+    ejercicio.delete()
+    return HttpResponseRedirect(reverse('mis-videos'))
+
+
+@login_required(login_url='login')
+@user_passes_test(is_kinesiologo)
+def kinesiologo_feedback(request, id):
+    rutina = Rutina.objects.get(id=id)
+    comentario = Comentario.objects.get(rutina_id=id)
+    feedbackForm = forms.FeedbackForm()
+    data = {
+        "comentario": comentario,
+        "feedbackForm": feedbackForm,
+        "rutina": rutina
+    }
+    if request.method == 'POST':
+        feedbackForm = forms.FeedbackForm(request.POST)
+        if feedbackForm.is_valid():
+            feedback = feedbackForm.save(commit=False)
+            feedback.rutina = rutina
+            comentario.save()
+
+            return HttpResponseRedirect(reverse('detalle-rutina', kwargs={'id': rutina.semana.id}))
+            #
+    return render(request, 'pagina/kinesiologo_feedback.html', data)
+
+
+@login_required(login_url='login')
+@user_passes_test(is_kinesiologo)
+def kinesiologo_ver_ejercicio(request, id):
+    grabacion = Grabacion.objects.get(rutina_id=id)
+    rutina = Rutina.objects.get(id=id)
+    ejercicio = Ejercicio.objects.get(id=rutina.ejercicio.id)
+    semana = Semana.objects.get(id=rutina.semana.id)
+    context = {
+        "rutina": rutina,
+        "ejercicio": ejercicio,
+        "semana": semana,
+        "grabacion": grabacion
+    }
+
+    return render(request, 'pagina/kinesiologo_ver_video.html', context=context)
