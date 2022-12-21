@@ -50,8 +50,11 @@
         </div>
 
         <div class="col d-flex justify-content-end">
+          {% if rutina.revisado %}
+          <a href="/" class="btn btn-success ml-2 h5-responsivee">Ver Feedback <i class="fa-regular fa-eye"></i></a>
+          {% endif %}
           {% if rutina.completado %}
-          <a class="btn btn-success ml-2 h5-responsivee">Ejercicio completado</a>
+          <a class="btn btn-secondary ml-2 h5-responsivee disabled">Ejercicio completado</a>
           {% else %}
           <a href="{% url 'paciente-ejercicio' rutina.id %}" class="btn-grad-normal ml-2 h5-responsivee">Ir al
             Ejercicio</a>

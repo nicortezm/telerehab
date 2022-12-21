@@ -14,7 +14,7 @@
 
   <div class="col">
     <div class="px-3 py-1">
-      <a class="text-uppercase text-dark text-decoration-none" href="{% url 'kinesiologo-dashboard'  %} "
+      <a class="text-uppercase text-dark text-decoration-none" href="{% url 'detalle-paciente' paciente.id  %} "
         style="cursor: pointer;"><i class="fa-solid fa-angle-left"></i> Volver</a>
     </div>
   </div>
@@ -67,8 +67,15 @@
         <div class="col d-flex justify-content-end">
 
           {% if rutina.completado %}
-          <a href="{% url 'kinesiologo-ejercicio' rutina.id %}" class="btn-grad-blue-2 ml-2 h5-responsivee">Detalles</a>
+          {% if rutina.revisado %}
+
+          <button class="btn btn-success" disabled>Revisado <i class=" fa-solid fa-check"></i></button>
+          {% else %}
+          <a href="{% url 'kinesiologo-ejercicio' rutina.id %}" class="btn-grad-blue-2 ml-2 h5-responsivee">Revisar</a>
+
           {% endif %}
+          {% endif %}
+
           <a href="{% url 'modificar-ejercicio' rutina.ejercicio.id %}" class="btn-grad-normal mx-2 h5-responsivee"><i
               class="fa-regular fa-pen-to-square"></i></a>
           <a href="{% url 'eliminar-rutina' rutina.id %}" class="btn-grad-red border border-none">

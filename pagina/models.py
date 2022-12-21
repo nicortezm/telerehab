@@ -74,6 +74,7 @@ class Rutina(models.Model):
 
     semana = models.ForeignKey(Semana, on_delete=models.CASCADE)
     completado = models.BooleanField(default=False)
+    revisado = models.BooleanField(default=False)
 
 
 class Grabacion(models.Model):

@@ -438,10 +438,10 @@ def kinesiologo_feedback(request, id):
         if feedbackForm.is_valid():
             feedback = feedbackForm.save(commit=False)
             feedback.rutina = rutina
-            comentario.save()
-
+            feedback.save()
+            rutina.revisado = True
+            rutina.save()
             return HttpResponseRedirect(reverse('detalle-rutina', kwargs={'id': rutina.semana.id}))
-            #
     return render(request, 'pagina/kinesiologo_feedback.html', data)
 
 
@@ -458,5 +458,4 @@ def kinesiologo_ver_ejercicio(request, id):
         "semana": semana,
         "grabacion": grabacion
     }
-
     return render(request, 'pagina/kinesiologo_ver_video.html', context=context)
