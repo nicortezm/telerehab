@@ -54,5 +54,6 @@ urlpatterns = [
          name="kinesiologo-feedback"),
     path('ver_ejercicios/<id>', views.kinesiologo_ver_ejercicio,
          name="kinesiologo-ejercicio"),
+    path('ver_feedback/<id>', views.paciente_ver_feedback, name="ver-feedback"),
 
 ]

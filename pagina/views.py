@@ -7,7 +7,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required, user_passes_test
 from users.views import is_paciente, is_kinesiologo, is_admin, is_admin_or_kinesiologo
 from users.models import Kinesiologo, Paciente, User
-from pagina.models import Categoria, Ejercicio, Grabacion, Rutina, Semana, Comentario
+from pagina.models import Categoria, Ejercicio, Feedback, Grabacion, Rutina, Semana, Comentario
 # Create your views here.
 
 # VISTAS GENERICAS
@@ -459,3 +459,23 @@ def kinesiologo_ver_ejercicio(request, id):
         "grabacion": grabacion
     }
     return render(request, 'pagina/kinesiologo_ver_video.html', context=context)
+
+
+@login_required(login_url='login')
+@user_passes_test(is_paciente)
+def paciente_ver_feedback(request, id):
+    grabacion = Grabacion.objects.get(rutina_id=id)
+    rutina = Rutina.objects.get(id=id)
+    ejercicio = Ejercicio.objects.get(id=rutina.ejercicio.id)
+    semana = Semana.objects.get(id=rutina.semana.id)
+    comentario = Comentario.objects.get(rutina_id=id)
+    feedback = Feedback.objects.get(rutina_id=id)
+    context = {
+        "rutina": rutina,
+        "ejercicio": ejercicio,
+        "semana": semana,
+        "grabacion": grabacion,
+        "comentario": comentario,
+        "feedback": feedback
+    }
+    return render(request, 'pagina/paciente_ver_feedback.html', context=context)
