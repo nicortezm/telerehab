@@ -9,14 +9,14 @@ Además ofrece multiples opciones de personalización de perfiles y de seguridad
 Indice
 ========
 
-- [Instalación](#installation)
-    - [Aplicación Principal](#typo3-extension-repository)
-    - [Librerías de Python](#composer)
-- [Archivos del proyecto](#typo3-setup)
-    - [Módulos](#extension)
-    - [Directorio de archivos](#database)
-- [Manual de uso](#page-setup)
-- [Requerimientos del proyecto](#license)
+- [Instalación](#instalación)
+    - [Aplicación Principal](#aplicación-principal)
+    - [Librerías de Python](#librerías-de-python)
+- [Archivos del proyecto](#archivos-del-proyecto)
+    - [Módulos](#módulos)
+    - [Directorio de archivos](#arbol-de-archivos)
+- [Manual de uso](#manual-de-uso)
+- [Requerimientos del proyecto](#requerimientos-del-proyecto)
 
 
 ### Instalación
